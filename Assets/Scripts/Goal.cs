@@ -8,17 +8,8 @@ public class Goal : MonoBehaviour
     public GameObject LeftGoal;
     public GameObject RightGoal;
     public Score score;
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject == LeftGoal)
-        {
-            score.AddScore("team2");
-        }
-        else if(collision.gameObject == RightGoal)
-        {
-            score.AddScore("team1");
-        }
-    }
+    
+
 
     private void OnTriggerEnter(Collider other)
     {
