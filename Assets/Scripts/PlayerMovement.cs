@@ -42,17 +42,19 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer(){
 
         movementVector = new Vector3(playerInput._horizontal, 0, playerInput._vertical);
-        movementVector = movementVector.normalized;
+        print(hips.velocity.magnitude);
 
         if(hips.velocity.magnitude < currentSpeedLimit){
-            hips.AddForce(movementVector*moveForce*forceMultiplier*Time.deltaTime);
+            hips.AddForce(movementVector.normalized*moveForce*forceMultiplier*Time.deltaTime,
+                    ForceMode.Force);
+        }
+        if(movementVector == Vector3.zero){
+            hips.velocity = Vector3.zero;
         }
     }
     void TurnPlayer(){
         if(movementVector != Vector3.zero){
-            Quaternion toRotation = Quaternion.LookRotation(movementVector, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation,
-                    toRotation,120*Time.deltaTime);
+            /* float angle = Vector2.Angle(Vector2.right); */
         }
 
     }
