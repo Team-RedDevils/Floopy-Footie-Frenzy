@@ -41,8 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer(){
 
-        movementVector = new Vector3(playerInput._horizontal, 0, playerInput._vertical);
-        print(hips.velocity.magnitude);
+        movementVector = playerInput._horizontal * -hips.transform.right + 
+                            playerInput._vertical * -hips.transform.forward;
 
         if(hips.velocity.magnitude < currentSpeedLimit){
             hips.AddForce(movementVector.normalized*moveForce*forceMultiplier*Time.deltaTime,

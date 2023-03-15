@@ -10,6 +10,11 @@ public class PlayerInput : MonoBehaviour
     [HideInInspector]
     public float _vertical;
 
+    [HideInInspector]
+    public float _mouseX;
+    [HideInInspector]
+    public float _mouseY;
+
     public event Action onDash = delegate {  };
 
     public bool isRunning;
@@ -23,11 +28,12 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInput(); 
+        GetMoveInput(); 
         CheckRunning();
+        GetMouseInput();
 
     }
-    void GetInput(){
+    void GetMoveInput(){
         _horizontal = Input.GetAxis("Horizontal");
         _vertical= Input.GetAxis("Vertical");
     }
@@ -38,5 +44,10 @@ public class PlayerInput : MonoBehaviour
         if(Input.GetKeyUp(runKey)){
             isRunning  = false;
         }
+    }
+
+    void GetMouseInput(){
+        _mouseX = Input.GetAxis("Mouse X");
+        _mouseY = Input.GetAxis("Mouse Y");
     }
 }

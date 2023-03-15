@@ -6,9 +6,9 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
-    private float yOffset = 12;
+    private float yOffset = 2.5f;
     [SerializeField]
-    private float zOffset = -10;
+    private float zOffset = 3.2f;
 
     [SerializeField]
     private Transform playerToFollow;
@@ -20,7 +20,7 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(playerToFollow.position.x, 
+        transform.position = new Vector3(playerToFollow.position.x,
                 playerToFollow.position.y + yOffset, playerToFollow.position.z + zOffset);
     }
 }
