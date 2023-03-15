@@ -40,20 +40,32 @@ public class RagdollMovement : MonoBehaviour
 
     void MovePlayer(){
 
+
         movementVector = playerInput._horizontal * -hips.transform.right + 
                             playerInput._vertical * -hips.transform.forward;
 
-        Vector3 horizontal = new Vector3(playerInput._horizontal, 0, 0);
-        Vector3 vertical = new Vector3(0, 0,playerInput._vertical);
 
 
-        
+        /* if(hips.velocity.magnitude < currentSpeedLimit){ */
+        /*     hips.AddForce(movementVector.normalized*moveForce*forceMultiplier*Time.deltaTime); */
+        /* } */
+        /* if(movementVector == Vector3.zero){ */
+        /*     hips.velocity = Vector3.zero; */
+        /* } */
+
         if(hips.velocity.magnitude < currentSpeedLimit){
-            hips.AddForce(movementVector.normalized*moveForce*forceMultiplier*Time.deltaTime);
-
-        }
-        if(movementVector == Vector3.zero){
-            hips.velocity = Vector3.zero;
+            if(Input.GetKey(KeyCode.W)){
+                hips.AddForce(-hips.transform.forward*moveForce*forceMultiplier*Time.deltaTime);
+            }
+            if(Input.GetKey(KeyCode.S)){
+                hips.AddForce(hips.transform.forward*moveForce*forceMultiplier*Time.deltaTime);
+            }
+            if(Input.GetKey(KeyCode.D)){
+                hips.AddForce(-hips.transform.right*moveForce*forceMultiplier*Time.deltaTime);
+            }
+            if(Input.GetKey(KeyCode.A)){
+                hips.AddForce(hips.transform.right*moveForce*forceMultiplier*Time.deltaTime);
+            }
         }
     }
 }
