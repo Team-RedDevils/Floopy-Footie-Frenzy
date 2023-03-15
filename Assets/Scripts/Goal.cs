@@ -8,6 +8,7 @@ public class Goal : MonoBehaviour
     public GameObject LeftGoal;
     public GameObject RightGoal;
     public Score score;
+    public TimeManager timeManager;
     
 
 
@@ -16,10 +17,12 @@ public class Goal : MonoBehaviour
         if(other.gameObject == LeftGoal)
         {
             score.AddScore("team2");
+            timeManager.goalHandler("team1");
         }
         else if (other.gameObject == RightGoal)
         {
             score.AddScore("team1");
+            timeManager.goalHandler("team2");
         }
     }
 }
