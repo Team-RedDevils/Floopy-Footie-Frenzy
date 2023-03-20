@@ -2342,6 +2342,74 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 517700385, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 517700385, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 629939444, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 629939444, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1011533127, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1011533127, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446539479342, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446539479342, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446738969609, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446738969609, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446921729012, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446921729012, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447009737930, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: runSpeedLimit
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447009737935, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447009737935, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447054003565, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447054003565, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
     - target: {fileID: 2262324447145510712, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
       propertyPath: m_Name
       value: Ragdoll
@@ -2389,6 +2457,70 @@ PrefabInstance:
     - target: {fileID: 2262324447145510713, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447288006012, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447288006012, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447319943790, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447319943790, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447370326389, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447370326389, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447384192975, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447384192975, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447526033763, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447526033763, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447805628144, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324447805628144, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324448031322195, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324448031322195, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324448467566282, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324448467566282, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 1500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03ba161458470d129ac71db8477dd15a, type: 3}

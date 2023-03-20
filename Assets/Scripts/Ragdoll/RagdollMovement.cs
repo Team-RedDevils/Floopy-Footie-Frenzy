@@ -26,6 +26,7 @@ public class RagdollMovement : MonoBehaviour
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        
     }
 
     // Update is called once per frame
@@ -40,31 +41,39 @@ public class RagdollMovement : MonoBehaviour
 
     void MovePlayer(){
 
-
-        movementVector = playerInput._horizontal * -hips.transform.right + 
-                            playerInput._vertical * -hips.transform.forward;
-
-
-
-        /* if(hips.velocity.magnitude < currentSpeedLimit){ */
-        /*     hips.AddForce(movementVector.normalized*moveForce*forceMultiplier*Time.deltaTime); */
-        /* } */
-        /* if(movementVector == Vector3.zero){ */
-        /*     hips.velocity = Vector3.zero; */
-        /* } */
-
         if(hips.velocity.magnitude < currentSpeedLimit){
+            //else statements are to prevent drifting when off button
             if(Input.GetKey(KeyCode.W)){
                 hips.AddForce(-hips.transform.forward*moveForce*forceMultiplier*Time.deltaTime);
+            }
+            else{
+                if(transform.InverseTransformDirection(hips.velocity).z < 0){
+                    hips.velocity = new Vector3(hips.velocity.x,hips.velocity.y,0);
+                }
             }
             if(Input.GetKey(KeyCode.S)){
                 hips.AddForce(hips.transform.forward*moveForce*forceMultiplier*Time.deltaTime);
             }
+            else{
+                if(transform.InverseTransformDirection(hips.velocity).z > 0){
+                    hips.velocity = new Vector3(hips.velocity.x,hips.velocity.y,0);
+                }
+            }
             if(Input.GetKey(KeyCode.D)){
                 hips.AddForce(-hips.transform.right*moveForce*forceMultiplier*Time.deltaTime);
             }
+            else{
+                if(transform.InverseTransformDirection(hips.velocity).x < 0){
+                    hips.velocity = new Vector3(0,hips.velocity.y,hips.velocity.z);
+                }
+            }
             if(Input.GetKey(KeyCode.A)){
                 hips.AddForce(hips.transform.right*moveForce*forceMultiplier*Time.deltaTime);
+            }
+            else{
+                if(transform.InverseTransformDirection(hips.velocity).x < 0){
+                    hips.velocity = new Vector3(0,hips.velocity.y,hips.velocity.z);
+                }
             }
         }
     }
