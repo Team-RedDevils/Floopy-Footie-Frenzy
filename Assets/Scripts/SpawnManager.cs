@@ -6,8 +6,9 @@ public class SpawnManager : MonoBehaviour
 {
 
     public GameObject Ball;
-    public GameObject SpawnPoint1;
-    public GameObject SpawnPoint2;
+    public GameObject[] BallSpawnPoints;
+    public GameObject[] PlayerSpawnPoints;
+    public Score score;
 
   
     public void Spawn(string team)
@@ -15,14 +16,17 @@ public class SpawnManager : MonoBehaviour
         Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         Ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
-        if(team == "team1")
+        Ball.transform.position = (team == score.team1) ? BallSpawnPoints[1].transform.position 
+            : BallSpawnPoints[0].transform.position;
+      /*
+        if (team == score.team1)
         {
-            Ball.transform.position = SpawnPoint1.transform.position;
+            Ball.transform.position = BallSpawnPoints[1].transform.position;
         }
         else
         {
-            Ball.transform.position = SpawnPoint2.transform.position;
+            Ball.transform.position = BallSpawnPoints[0].transform.position;
         }
-        
+        */
     }
 }
