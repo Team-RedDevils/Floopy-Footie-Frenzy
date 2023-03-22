@@ -15,6 +15,12 @@ public class CameraRotation : MonoBehaviour
     private float mouseXRotation;
     private float mouseYRotation;
 
+
+    [SerializeField]
+    private float mouseYClamp = -15;
+    [SerializeField]
+    private float mouseZClamp = 15;
+
     [SerializeField ]
     private ConfigurableJoint hipJoint, stomachJoint;
     // Start is called before the first frame update
@@ -35,7 +41,7 @@ public class CameraRotation : MonoBehaviour
     void CamControl(){
         mouseXRotation += playerInput._mouseX * rotationSpeed ;
         mouseYRotation -= playerInput._mouseY * rotationSpeed ;
-        mouseYRotation = Mathf.Clamp(mouseYRotation, -15,15);
+        mouseYRotation = Mathf.Clamp(mouseYRotation, mouseYClamp,mouseZClamp);
 
         Quaternion holderRotation = Quaternion.Euler(-mouseYRotation, mouseXRotation,0);
         cameraHolder.rotation = holderRotation;

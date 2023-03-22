@@ -32,12 +32,16 @@ public class RagdollMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
+        SetSpeedLimit();
     }
 
     void FixedUpdate(){
         MovePlayer();
     } 
+
+    void SetSpeedLimit(){
+        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
+    }
 
     void MovePlayer(){
 

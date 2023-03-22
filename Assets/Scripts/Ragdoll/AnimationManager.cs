@@ -8,6 +8,8 @@ public class AnimationManager : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private PlayerInput playerInput;
+
+    private string walkingAnimName = "walking";
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +24,10 @@ public class AnimationManager : MonoBehaviour
     }
     void SetAnim(){
         if(playerInput._vertical == 0 && playerInput._horizontal == 0){
-            animator.SetBool("walking",false);
+            animator.SetBool(walkingAnimName,false);
         }
         else{
-            animator.SetBool("walking",true);
+            animator.SetBool(walkingAnimName,true);
         }
     }
 }
