@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    public PhotonLauncher PLauncher;
+
 
     float startingTime = 180f;
     float currentTime = 0f;
@@ -33,7 +33,6 @@ public class TimeManager : MonoBehaviour
         
         if(currentTime <= 0)
         {
-            PLauncher.FinishGame();
             Destroy(gameObject);
         }
     }
