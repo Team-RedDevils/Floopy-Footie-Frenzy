@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class TimeManager : MonoBehaviour
 {
-    float startingTime = 180f;
+
+
+    public float startingTime;
     float currentTime = 0f;
     float timeAfterGoal = 1f;
-    float centerTime = 3f;
+    //float centerTime = 3f;
 
     string onsetTeam;
 
@@ -23,16 +26,22 @@ public class TimeManager : MonoBehaviour
 
     void Update()
     {
-        currentTime -= 1*Time.deltaTime;
+        currentTime -= 1 * Time.deltaTime;
         string minutes = Mathf.Floor(currentTime / 60).ToString("00");
         string seconds = Mathf.Floor(currentTime % 60).ToString("00");
-        TimeText.text = minutes+":"+seconds;
+        TimeText.text = minutes + ":" + seconds;
+
+        if (currentTime <= 0)
+        {
+            TimeText.text = "00:00";
+            Destroy(gameObject);
+        }
     }
     public void goalHandler(string team)
     {
         onsetTeam = team;
         currentTime += timeAfterGoal;
-        Invoke("Spawn", timeAfterGoal);
+        Invoke(nameof(Spawn), timeAfterGoal);
     }
 
     void Spawn()

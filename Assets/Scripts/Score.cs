@@ -8,23 +8,27 @@ public class Score : MonoBehaviour
     public TextMeshProUGUI ScoreText;
     public int team1score = 0;
     public int team2score = 0;
+    public string team1;
+    public string team2;
     public void AddScore(string team)
     {
-        if(team.Equals("team1"))
+        if (team == team1)
         {
             team1score++;
-            Debug.Log("Team 1 scored!");
+            Debug.Log(team1 + " scored!");
         }
-        else{
+        else
+        {
             team2score++;
-            Debug.Log("Team 2 scored!");
+            Debug.Log(team2 + " scored!");
         }
     }
     public void UpdateScore()
     {
-        ScoreText.text = "t1 " + team1score + "-" + team2score +" t2";
+        ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2;
     }
-    // Update is called once per frame
+
+
     void Update()
     {
         UpdateScore();
