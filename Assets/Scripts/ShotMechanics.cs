@@ -20,7 +20,7 @@ public class ShotMechanics : MonoBehaviour
         if(ball)
         {
             if(Input.GetMouseButtonDown(0)){
-                ballObj.GetComponent<Rigidbody>().velocity = transform.TransformDirection (new Vector3 (0,0,-6));
+                ballObj.GetComponent<Rigidbody>().velocity = transform.TransformDirection (new Vector3 (0,0,-12));
             }
             if(Input.GetMouseButtonDown(1)){
                 ballObj.GetComponent<Rigidbody>().velocity = transform.TransformDirection (new Vector3 (0,0,Random.Range(-shot1,-shot2)));
