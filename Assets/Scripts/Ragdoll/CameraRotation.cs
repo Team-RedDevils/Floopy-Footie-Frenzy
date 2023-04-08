@@ -32,7 +32,6 @@ public class CameraRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
     void FixedUpdate(){
         CamControl();
@@ -46,7 +45,9 @@ public class CameraRotation : MonoBehaviour
         Quaternion holderRotation = Quaternion.Euler(-mouseYRotation, mouseXRotation,0);
         cameraHolder.rotation = holderRotation;
 
+        // left right look
         hipJoint.targetRotation = Quaternion.Euler(0,- mouseXRotation,0);
+        // up down look
         stomachJoint.targetRotation = Quaternion.Euler(+mouseYRotation + stomachOffset,0,0);
     }
 }

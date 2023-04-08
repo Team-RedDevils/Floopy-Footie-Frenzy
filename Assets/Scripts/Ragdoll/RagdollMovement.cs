@@ -11,6 +11,13 @@ public class RagdollMovement : MonoBehaviour
     private Rigidbody hips;
 
 
+    [SerializeField]
+    private Transform cam;
+    [SerializeField]
+    private float turnSmoothTime = 0.1f;
+    private float turnSmoothVel;
+
+
     [Header("Walking/Running")]
     [SerializeField]
     private float moveForce = 10;
@@ -20,7 +27,7 @@ public class RagdollMovement : MonoBehaviour
     private float walkSpeedLimit = 5;
     [SerializeField]
     private float runSpeedLimit = 8;
-    private float forceMultiplier = 1000;
+    private float forceMultiplier = 100;
     private Vector3 movementVector;
     
     [SerializeField]
@@ -33,7 +40,10 @@ public class RagdollMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Cursor.lockState = CursorLockMode.Locked;
         playerInput = GetComponent<PlayerInput>();
+
         distToGround = 1.18f;
     }
 
@@ -47,12 +57,14 @@ public class RagdollMovement : MonoBehaviour
     void FixedUpdate(){
         MovePlayer();
     } 
+    
 
     void SetSpeedLimit(){
         currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
     }
 
     void MovePlayer(){
+
 
          if (playerInput.isJumping && IsGrounded())
         {
@@ -71,44 +83,35 @@ public class RagdollMovement : MonoBehaviour
             ySpeed = 0;
             playerInput.isJumping = false;
         }
-        
-       
 
         if(hips.velocity.magnitude < currentSpeedLimit){
-            //else statements are to prevent drifting when off button
-            if(Input.GetKey(KeyCode.W)){
-                hips.AddForce(-hips.transform.forward*moveForce*forceMultiplier*Time.deltaTime);
+
+
+            movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
+
+
+            /* movementVector = new Vector3(playerInput._horizontal,0f,playerInput._vertical).normalized; */
+            if(movementVector.magnitude > 0){
+                RotatePlayer();
+                hips.AddForce(-movementVector*moveForce*forceMultiplier*Time.deltaTime,
+                        ForceMode.VelocityChange);
             }
             else{
-                if(transform.InverseTransformDirection(hips.velocity).z < 0){
-                    hips.velocity = new Vector3(hips.velocity.x,hips.velocity.y,0);
-                }
+
+                hips.velocity = Vector3.zero;
+
             }
-            if(Input.GetKey(KeyCode.S)){
-                hips.AddForce(hips.transform.forward*moveForce*forceMultiplier*Time.deltaTime);
-            }
-            else{
-                if(transform.InverseTransformDirection(hips.velocity).z > 0){
-                    hips.velocity = new Vector3(hips.velocity.x,hips.velocity.y,0);
-                }
-            }
-            if(Input.GetKey(KeyCode.D)){
-                hips.AddForce(-hips.transform.right*moveForce*forceMultiplier*Time.deltaTime);
-            }
-            else{
-                if(transform.InverseTransformDirection(hips.velocity).x < 0){
-                    hips.velocity = new Vector3(0,hips.velocity.y,hips.velocity.z);
-                }
-            }
-            if(Input.GetKey(KeyCode.A)){
-                hips.AddForce(hips.transform.right*moveForce*forceMultiplier*Time.deltaTime);
-            }
-            else{
-                if(transform.InverseTransformDirection(hips.velocity).x < 0){
-                    hips.velocity = new Vector3(0,hips.velocity.y,hips.velocity.z);
-                }
-            }
+
         }
+
+    }
+
+    void RotatePlayer(){
+        float targetAngle = Mathf.Atan2(movementVector.x,movementVector.z)* Mathf.Rad2Deg ; 
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
+
+        GetComponent<ConfigurableJoint>().targetRotation = Quaternion.Euler(0,- angle,0);
+
     }
 
     bool IsGrounded()
