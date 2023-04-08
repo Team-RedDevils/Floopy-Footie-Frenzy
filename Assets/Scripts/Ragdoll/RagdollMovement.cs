@@ -44,7 +44,7 @@ public class RagdollMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         playerInput = GetComponent<PlayerInput>();
 
-        distToGround = 1.18f;
+        distToGround = 0.6f;
     }
 
     // Update is called once per frame
@@ -116,7 +116,6 @@ public class RagdollMovement : MonoBehaviour
 
     bool IsGrounded()
     {
-        
-        return Physics.Raycast(hips.transform.position, Vector3.down, distToGround);
+        return Physics.Raycast(hips.transform.Find("BallTrigger").transform.position, Vector3.down, distToGround);
     }
 }

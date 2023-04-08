@@ -2556,6 +2556,10 @@ PrefabInstance:
       propertyPath: m_AngularYZDrive.positionSpring
       value: 1500
       objectReference: {fileID: 0}
+    - target: {fileID: 582586950, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: ballObj
+      value: 
+      objectReference: {fileID: 320872461}
     - target: {fileID: 629939444, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
       propertyPath: m_AngularXDrive.positionSpring
       value: 1500
@@ -2564,6 +2568,10 @@ PrefabInstance:
       propertyPath: m_AngularYZDrive.positionSpring
       value: 1500
       objectReference: {fileID: 0}
+    - target: {fileID: 936197667, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.04397283
+      objectReference: {fileID: 0}
     - target: {fileID: 1011533127, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
       propertyPath: m_AngularXDrive.positionSpring
       value: 1500
@@ -2571,10 +2579,54 @@ PrefabInstance:
     - target: {fileID: 1011533127, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
       propertyPath: m_AngularYZDrive.positionSpring
       value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039445026, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.2960334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593575929, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.06213744
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593575929, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000017173132
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593575929, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0000000010691603
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064056395, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.025841683
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064056395, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000017200632
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064056395, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -4.4464182e-10
       objectReference: {fileID: 0}
     - target: {fileID: 58539116427806902, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
       propertyPath: sceneViewId
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446383102130, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.2960334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446383102130, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.043972827
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446383102130, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000000037216874
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262324446383102130, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -1.6381158e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2262324446539479342, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
       propertyPath: m_AngularXDrive.positionSpring
@@ -2606,7 +2658,7 @@ PrefabInstance:
       objectReference: {fileID: 836819078}
     - target: {fileID: 2262324447009737930, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
       propertyPath: jumpSpeed
-      value: 2.5
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2262324447009737930, guid: 03ba161458470d129ac71db8477dd15a, type: 3}
       propertyPath: runSpeedLimit
