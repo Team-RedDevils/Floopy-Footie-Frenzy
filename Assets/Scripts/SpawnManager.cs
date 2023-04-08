@@ -24,8 +24,7 @@ public class SpawnManager : MonoBehaviour
         Ball.transform.position = (team == score.team1) ? BallSpawnPoints[1].transform.position
             : BallSpawnPoints[0].transform.position;
 
-
-        Player.transform.position = PlayerSpawnPoints[Random.Range(0,PlayerSpawnPoints.Length)].transform.position;
+        Player.transform.Find("Hips").transform.position = PlayerSpawnPoints[Random.Range(0, PlayerSpawnPoints.Length)].transform.position;
     }
 
     /*
