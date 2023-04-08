@@ -58,10 +58,14 @@ public class RagdollMovement : MonoBehaviour
 
         if(hips.velocity.magnitude < currentSpeedLimit){
 
-            movementVector = new Vector3(playerInput._horizontal,0f,playerInput._vertical).normalized;
+
+            movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
+
+
+            /* movementVector = new Vector3(playerInput._horizontal,0f,playerInput._vertical).normalized; */
             if(movementVector.magnitude > 0){
                 RotatePlayer();
-                hips.AddForce(movementVector*moveForce*forceMultiplier*Time.deltaTime,
+                hips.AddForce(-movementVector*moveForce*forceMultiplier*Time.deltaTime,
                         ForceMode.VelocityChange);
             }
             else{
