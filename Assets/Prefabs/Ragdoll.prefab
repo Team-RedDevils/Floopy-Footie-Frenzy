@@ -1063,7 +1063,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980786069}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.86, y: 3.6210332, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3432,7 +3432,6 @@ GameObject:
   - component: {fileID: 2262324447009737935}
   - component: {fileID: 2262324447009737930}
   - component: {fileID: 2262324447009737933}
-  - component: {fileID: 2262324447009737931}
   - component: {fileID: 582586950}
   m_Layer: 6
   m_Name: Hips
@@ -3535,7 +3534,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &2262324447009737935
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -3646,6 +3645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2262324447009737933}
   hips: {fileID: 2262324447009737932}
+  hipsCopy: {fileID: 1396407267}
   moveForce: 1.5
   currentSpeedLimit: 0
   walkSpeedLimit: 6
@@ -3667,20 +3667,6 @@ MonoBehaviour:
   _mouseX: 0
   _mouseY: 0
   isRunning: 0
---- !u!114 &2262324447009737931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2262324447009737922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9f34a7e97584357a0e9ec5747adab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetLimb: {fileID: 1396407268}
-  mirror: 0
 --- !u!114 &582586950
 MonoBehaviour:
   m_ObjectHideFlags: 0
