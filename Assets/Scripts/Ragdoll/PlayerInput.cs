@@ -18,12 +18,15 @@ public class PlayerInput : MonoBehaviour
     public event Action onDash = delegate {  };
 
     public bool isRunning;
+    public bool isJumping;
 
     private KeyCode runKey;
+    private KeyCode jumpKey;
     // Start is called before the first frame update
     void Start()
     {
         runKey = KeyCode.LeftShift;
+        jumpKey = KeyCode.Space;
     }
 
     // Update is called once per frame
@@ -32,6 +35,7 @@ public class PlayerInput : MonoBehaviour
         GetMoveInput(); 
         CheckRunning();
         GetMouseInput();
+        CheckJumping();
 
     }
     void GetMoveInput(){
@@ -50,5 +54,13 @@ public class PlayerInput : MonoBehaviour
     void GetMouseInput(){
         _mouseX = Input.GetAxis("Mouse X");
         _mouseY = Input.GetAxis("Mouse Y");
+    }
+
+    void CheckJumping()
+    {
+        if (Input.GetKeyDown(jumpKey))
+        {
+            isJumping = true;
+        }
     }
 }

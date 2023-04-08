@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,13 @@ public class RagdollMovement : MonoBehaviour
     private float runSpeedLimit = 8;
     private float forceMultiplier = 100;
     private Vector3 movementVector;
+    
+    [SerializeField]
+    private float jumpSpeed = 2.5f;
+    private float ySpeed;
+    float distToGround;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,12 +44,14 @@ public class RagdollMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         playerInput = GetComponent<PlayerInput>();
 
+        distToGround = 1.18f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetSpeedLimit();
+        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
+
     }
 
     void FixedUpdate(){
@@ -55,6 +65,24 @@ public class RagdollMovement : MonoBehaviour
 
     void MovePlayer(){
 
+
+         if (playerInput.isJumping && IsGrounded())
+        {
+            
+            ySpeed = jumpSpeed;
+            
+            hips.AddForce(Vector3.up * ySpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
+        }
+        
+        if (!IsGrounded())
+        {
+            ySpeed += Physics.gravity.y * Time.deltaTime;
+        }
+        else
+        {
+            ySpeed = 0;
+            playerInput.isJumping = false;
+        }
 
         if(hips.velocity.magnitude < currentSpeedLimit){
 
@@ -84,5 +112,11 @@ public class RagdollMovement : MonoBehaviour
 
         GetComponent<ConfigurableJoint>().targetRotation = Quaternion.Euler(0,- angle,0);
 
+    }
+
+    bool IsGrounded()
+    {
+        
+        return Physics.Raycast(hips.transform.position, Vector3.down, distToGround);
     }
 }

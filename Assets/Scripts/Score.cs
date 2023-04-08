@@ -12,21 +12,23 @@ public class Score : MonoBehaviour
     public string team2;
     public void AddScore(string team)
     {
-        if(team == team1)
+
+        if (team == team1)
         {
             team1score++;
-            Debug.Log(team1+" scored!");
+            Debug.Log(team1 + " scored!");
         }
-        else{
+        else
+        {
             team2score++;
-            Debug.Log(team2+" scored!");
+            Debug.Log(team2 + " scored!");
         }
     }
     public void UpdateScore()
     {
-        ScoreText.text = team1 + " " + team1score + "-" + team2score +" " + team2;
+        ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2;
     }
-    
+
 
     void Update()
     {

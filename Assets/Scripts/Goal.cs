@@ -5,17 +5,17 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Goal : MonoBehaviour
 {
-    public GameObject LeftGoal;
-    public GameObject RightGoal;
-    public Score score;
-    public TimeManager timeManager;
-    
-    
+    [SerializeField] GameObject LeftGoal;
+    [SerializeField] GameObject RightGoal;
+    [SerializeField] Score score;
+    [SerializeField] TimeManager timeManager;
+
+
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == LeftGoal)
+        if (other.gameObject == LeftGoal)
         {
             score.AddScore(score.team2);
             timeManager.goalHandler(score.team2);
