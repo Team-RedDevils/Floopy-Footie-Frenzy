@@ -54,7 +54,6 @@ public class RagdollMovement : MonoBehaviour
         {
             
             ySpeed = jumpSpeed;
-            Debug.Log("zýpladý " + ySpeed);
             
             hips.AddForce(Vector3.up * ySpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
         }
