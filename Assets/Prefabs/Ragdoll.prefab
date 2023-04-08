@@ -2601,6 +2601,8 @@ MonoBehaviour:
   playerInput: {fileID: 2262324447009737933}
   cameraHolder: {fileID: 2262324447201584897}
   stomachOffset: 5
+  mouseYClamp: -15
+  mouseZClamp: 15
   hipJoint: {fileID: 2262324447009737935}
   stomachJoint: {fileID: 2262324447384192975}
 --- !u!1 &2262324446487236603

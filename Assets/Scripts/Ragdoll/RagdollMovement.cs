@@ -41,12 +41,16 @@ public class RagdollMovement : MonoBehaviour
     void Update()
     {
         currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
-        
+
     }
 
     void FixedUpdate(){
         MovePlayer();
     } 
+
+    void SetSpeedLimit(){
+        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
+    }
 
     void MovePlayer(){
 

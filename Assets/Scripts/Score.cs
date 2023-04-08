@@ -12,6 +12,7 @@ public class Score : MonoBehaviour
     public string team2;
     public void AddScore(string team)
     {
+
         if (team == team1)
         {
             team1score++;
