@@ -9,6 +9,9 @@ public class RagdollMovement : MonoBehaviour
     [SerializeField]
     private Rigidbody hips;
 
+    [SerializeField]
+    private GameObject hipsCopy;
+
 
     [Header("Walking/Running")]
     [SerializeField]
@@ -19,14 +22,14 @@ public class RagdollMovement : MonoBehaviour
     private float walkSpeedLimit = 5;
     [SerializeField]
     private float runSpeedLimit = 8;
-    private float forceMultiplier = 1000;
+    private float forceMultiplier = 100;
     private Vector3 movementVector;
 
     // Start is called before the first frame update
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        
+
     }
 
     // Update is called once per frame
@@ -38,6 +41,7 @@ public class RagdollMovement : MonoBehaviour
     void FixedUpdate(){
         MovePlayer();
     } 
+    
 
     void SetSpeedLimit(){
         currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
@@ -45,40 +49,28 @@ public class RagdollMovement : MonoBehaviour
 
     void MovePlayer(){
 
+
         if(hips.velocity.magnitude < currentSpeedLimit){
-            //else statements are to prevent drifting when off button
-            if(Input.GetKey(KeyCode.W)){
-                hips.AddForce(-hips.transform.forward*moveForce*forceMultiplier*Time.deltaTime);
+
+            movementVector = new Vector3(playerInput._horizontal,0f,playerInput._vertical).normalized;
+            if(movementVector.magnitude > 0){
+                RotatePlayer();
+                hips.AddForce(-movementVector*moveForce*forceMultiplier*Time.deltaTime,
+                        ForceMode.VelocityChange);
             }
             else{
-                if(transform.InverseTransformDirection(hips.velocity).z < 0){
-                    hips.velocity = new Vector3(hips.velocity.x,hips.velocity.y,0);
-                }
+
+                hips.velocity = Vector3.zero;
+
             }
-            if(Input.GetKey(KeyCode.S)){
-                hips.AddForce(hips.transform.forward*moveForce*forceMultiplier*Time.deltaTime);
-            }
-            else{
-                if(transform.InverseTransformDirection(hips.velocity).z > 0){
-                    hips.velocity = new Vector3(hips.velocity.x,hips.velocity.y,0);
-                }
-            }
-            if(Input.GetKey(KeyCode.D)){
-                hips.AddForce(-hips.transform.right*moveForce*forceMultiplier*Time.deltaTime);
-            }
-            else{
-                if(transform.InverseTransformDirection(hips.velocity).x < 0){
-                    hips.velocity = new Vector3(0,hips.velocity.y,hips.velocity.z);
-                }
-            }
-            if(Input.GetKey(KeyCode.A)){
-                hips.AddForce(hips.transform.right*moveForce*forceMultiplier*Time.deltaTime);
-            }
-            else{
-                if(transform.InverseTransformDirection(hips.velocity).x < 0){
-                    hips.velocity = new Vector3(0,hips.velocity.y,hips.velocity.z);
-                }
-            }
+
         }
+
+    }
+
+    void RotatePlayer(){
+        print(GetComponent<ConfigurableJoint>().targetRotation);
+        float rotateAngle = Mathf.Atan2(movementVector.x,movementVector.z)* Mathf.Rad2Deg;
+        GetComponent<ConfigurableJoint>().targetRotation = Quaternion.Euler(0,- rotateAngle,0);
     }
 }

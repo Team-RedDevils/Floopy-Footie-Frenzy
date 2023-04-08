@@ -35,8 +35,8 @@ public class PlayerInput : MonoBehaviour
 
     }
     void GetMoveInput(){
-        _horizontal = Input.GetAxis("Horizontal");
-        _vertical= Input.GetAxis("Vertical");
+        _horizontal = Input.GetAxisRaw("Horizontal");
+        _vertical= Input.GetAxisRaw("Vertical");
     }
     void CheckRunning(){
         if(Input.GetKeyDown(runKey)){
