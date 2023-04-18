@@ -1,20 +1,26 @@
 
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SpawnManager : MonoBehaviour
 {
-
+    public static SpawnManager Instance;
 
     public GameObject Ball;
-    public GameObject Player;
     public Spawnpoint[] BallSpawnPoints;
     [SerializeField] Spawnpoint[] PlayerSpawnPoints;
     public Score score;
- 
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void Spawn(string team)
     {
@@ -24,14 +30,11 @@ public class SpawnManager : MonoBehaviour
         Ball.transform.position = (team == score.team1) ? BallSpawnPoints[1].transform.position
             : BallSpawnPoints[0].transform.position;
 
-        Player.transform.Find("Hips").transform.position = PlayerSpawnPoints[Random.Range(0, PlayerSpawnPoints.Length)].transform.position;
+        PlayerManager.Instance.Respawn();
     }
 
-    /*
     public Transform GetSpawnpoint()
     {
-
-        Debug.Log(PlayerSpawnPoints[3].transform.position);
         return PlayerSpawnPoints[Random.Range(0, PlayerSpawnPoints.Length)].transform;
-    } */
+    }
 }

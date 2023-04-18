@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Photon.Pun;
 
 
-public class TimeManager : MonoBehaviour
+public class TimeManager : MonoBehaviourPunCallbacks
 {
-
-
     public float startingTime;
     float currentTime = 0f;
     float timeAfterGoal = 1f;
@@ -18,12 +17,12 @@ public class TimeManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI TimeText;
     public SpawnManager spawnManager;
-
     void Start()
     {
         currentTime = startingTime;
     }
 
+    [PunRPC]
     void Update()
     {
         currentTime -= 1 * Time.deltaTime;
@@ -34,7 +33,6 @@ public class TimeManager : MonoBehaviour
         if (currentTime <= 0)
         {
             TimeText.text = "00:00";
-            Destroy(gameObject);
         }
     }
     public void goalHandler(string team)
