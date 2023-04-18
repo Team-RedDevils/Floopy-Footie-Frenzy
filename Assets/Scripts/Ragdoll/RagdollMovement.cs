@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,10 +12,11 @@ public class RagdollMovement : MonoBehaviour
     private Rigidbody hips;
 
 
+    [Header("Rotating")]
     [SerializeField]
     private Transform cam;
     [SerializeField]
-    private float turnSmoothTime = 0.1f;
+    private float turnSmoothTime = 0.5f;
     private float turnSmoothVel;
 
 
@@ -29,22 +31,32 @@ public class RagdollMovement : MonoBehaviour
     private float runSpeedLimit = 8;
     private float forceMultiplier = 100;
     private Vector3 movementVector;
-    
+
+    [Header("Jumping")]
     [SerializeField]
     private float jumpSpeed = 2.5f;
-    private float ySpeed;
-    float distToGround;
+    [SerializeField]
+    private float fallSpeed = 4f;
+    [SerializeField]
+    private ConfigurableJoint[] joints;
+    private float distToGround;
+    private bool canMove =true;
+
+
+    private int stamina = 100;
+
+    void Awake(){
+        Cursor.lockState = CursorLockMode.Locked;
+        playerInput = GetComponent<PlayerInput>();
+        playerInput.onJump += Jump;
+    }
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-        Cursor.lockState = CursorLockMode.Locked;
-        playerInput = GetComponent<PlayerInput>();
-
-        distToGround = 1.18f;
+        distToGround = 0.6f;
     }
 
     // Update is called once per frame
@@ -55,55 +67,64 @@ public class RagdollMovement : MonoBehaviour
     }
 
     void FixedUpdate(){
-        MovePlayer();
+
+        if(canMove){
+            MovePlayer();
+        }
+        IncreaseGravity();
     } 
-    
+
 
     void SetSpeedLimit(){
         currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
     }
 
-    void MovePlayer(){
-
-
-         if (playerInput.isJumping && IsGrounded())
-        {
-            
-            ySpeed = jumpSpeed;
-            
-            hips.AddForce(Vector3.up * ySpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
+    void Jump(){
+        if(IsGrounded() && canMove){
+            hips.AddForce((Vector3.up+(-transform.forward*1.2f))* jumpSpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
+            StartCoroutine(nameof(ReleaseBody));
         }
-        
+    }
+
+    IEnumerator ReleaseBody(){
+        foreach(ConfigurableJoint j in joints){
+            JointDrive jointDrive = j.angularXDrive;
+            jointDrive.positionSpring = 100f;
+            j.angularXDrive = jointDrive;
+        }
+        canMove = false;
+
+        yield return new WaitForSeconds(2);
+
+        foreach(ConfigurableJoint j in joints){
+            JointDrive jointDrive = j.angularXDrive;
+            jointDrive.positionSpring = 2000;
+            j.angularXDrive = jointDrive;
+        }
+        canMove = true;
+    }
+
+    void IncreaseGravity(){
         if (!IsGrounded())
         {
-            ySpeed += Physics.gravity.y * Time.deltaTime;
+            hips.AddForce(Vector3.down * fallSpeed * forceMultiplier * Time.deltaTime);
         }
-        else
-        {
-            ySpeed = 0;
-            playerInput.isJumping = false;
-        }
+    }
+
+    void MovePlayer(){
 
         if(hips.velocity.magnitude < currentSpeedLimit){
-
-
             movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
 
-
-            /* movementVector = new Vector3(playerInput._horizontal,0f,playerInput._vertical).normalized; */
             if(movementVector.magnitude > 0){
                 RotatePlayer();
                 hips.AddForce(-movementVector*moveForce*forceMultiplier*Time.deltaTime,
                         ForceMode.VelocityChange);
             }
             else{
-
                 hips.velocity = Vector3.zero;
-
             }
-
         }
-
     }
 
     void RotatePlayer(){
@@ -111,12 +132,10 @@ public class RagdollMovement : MonoBehaviour
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
 
         GetComponent<ConfigurableJoint>().targetRotation = Quaternion.Euler(0,- angle,0);
-
     }
 
     bool IsGrounded()
     {
-        
-        return Physics.Raycast(hips.transform.position, Vector3.down, distToGround);
+        return Physics.Raycast(hips.transform.Find("BallTrigger").transform.position, Vector3.down, distToGround);
     }
 }
