@@ -18,9 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Rooms.unity
     guid: 863d1dc845602b5498fbf748638bc60d
   - enabled: 1
-    path: Assets/Scenes/Ahmet.unity
-    guid: bc7b8c4909c5a0a42a096de53525b7d0
-  - enabled: 1
     path: Assets/Scenes/Ozan.unity
     guid: 28946f4d4f3420741b7446e73528229c
+  - enabled: 1
+    path: Assets/Scenes/Ahmet.unity
+    guid: bc7b8c4909c5a0a42a096de53525b7d0
   m_configObjects: {}
