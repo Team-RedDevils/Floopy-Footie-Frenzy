@@ -16,7 +16,7 @@ public class PlayerInput : MonoBehaviour
     [HideInInspector]
     public float _mouseY;
 
-    public event Action onDash = delegate {  };
+    public event Action onJump = delegate {  };
 
     public bool isRunning;
     public bool isJumping;
@@ -72,7 +72,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetKeyDown(jumpKey))
         {
-            isJumping = true;
+            onJump();
         }
     }
 }
