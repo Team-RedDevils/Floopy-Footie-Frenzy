@@ -43,7 +43,8 @@ public class RagdollMovement : MonoBehaviour
     private bool canMove =true;
 
 
-    private int stamina = 100;
+    private int stamina = 20;
+    private bool healing = false;
 
     void Awake(){
         Cursor.lockState = CursorLockMode.Locked;
@@ -57,31 +58,54 @@ public class RagdollMovement : MonoBehaviour
     void Start()
     {
         distToGround = 0.6f;
+        /* StartCoroutine(nameof(DecreaseStamina)); */
+        /* StartCoroutine(nameof(IncreaseStamina)); */
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
-
+        SetSpeedLimit();
+        StaminaCheck();
     }
 
     void FixedUpdate(){
-
         if(canMove){
             MovePlayer();
         }
         IncreaseGravity();
     } 
 
+    void StaminaCheck(){
+        if(stamina < 100 && !healing){
+            StartCoroutine(nameof(IncreaseStamina));
+        }
+
+    }
+    public int GetStamina(){
+        return stamina;
+    }
+
+    IEnumerator IncreaseStamina(){
+        healing = true;
+        while(stamina < 100){
+            stamina++;
+            yield return new WaitForSeconds(0.1f);
+        }
+        healing = false;
+
+    }
+
+
 
     void SetSpeedLimit(){
-        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
+        currentSpeedLimit = playerInput.isRunning && stamina > 0 ? runSpeedLimit : walkSpeedLimit;
     }
 
     void Jump(){
-        if(IsGrounded() && canMove){
+        if(IsGrounded() && canMove && stamina > 40){
             hips.AddForce((Vector3.up+(-transform.forward*1.2f))* jumpSpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
+            stamina = stamina-40;
             StartCoroutine(nameof(ReleaseBody));
         }
     }
@@ -112,7 +136,6 @@ public class RagdollMovement : MonoBehaviour
     }
 
     void MovePlayer(){
-
         if(hips.velocity.magnitude < currentSpeedLimit){
             movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
 
@@ -124,6 +147,15 @@ public class RagdollMovement : MonoBehaviour
             else{
                 hips.velocity = Vector3.zero;
             }
+        }
+    }
+    IEnumerator DecreaseStamina(){
+        while(true){
+            while(playerInput.isRunning && stamina > 0){
+                stamina--;
+                yield return new WaitForSeconds(0.1f);
+            }
+
         }
     }
 
