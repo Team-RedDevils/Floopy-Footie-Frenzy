@@ -45,6 +45,8 @@ public class RagdollMovement : MonoBehaviour
 
     private int stamina = 20;
     private bool healing = false;
+    private bool decreasing = false;
+    
 
     void Awake(){
         Cursor.lockState = CursorLockMode.Locked;
@@ -77,7 +79,7 @@ public class RagdollMovement : MonoBehaviour
     } 
 
     void StaminaCheck(){
-        if(stamina < 100 && !healing){
+        if(stamina < 100 && !healing ){
             StartCoroutine(nameof(IncreaseStamina));
         }
 
@@ -88,7 +90,7 @@ public class RagdollMovement : MonoBehaviour
 
     IEnumerator IncreaseStamina(){
         healing = true;
-        while(stamina < 100){
+        while(stamina < 100 && !decreasing){
             stamina++;
             yield return new WaitForSeconds(0.1f);
         }
@@ -96,10 +98,17 @@ public class RagdollMovement : MonoBehaviour
 
     }
 
-
-
     void SetSpeedLimit(){
         currentSpeedLimit = playerInput.isRunning && stamina > 0 ? runSpeedLimit : walkSpeedLimit;
+        if(stamina > 0){
+            if(playerInput.isRunning && !decreasing){
+                StartCoroutine(nameof(DecreaseStamina));
+                currentSpeedLimit = runSpeedLimit;
+            }
+        }
+        else{
+            currentSpeedLimit = walkSpeedLimit;
+        }
     }
 
     void Jump(){
@@ -150,13 +159,12 @@ public class RagdollMovement : MonoBehaviour
         }
     }
     IEnumerator DecreaseStamina(){
-        while(true){
-            while(playerInput.isRunning && stamina > 0){
-                stamina--;
-                yield return new WaitForSeconds(0.1f);
-            }
-
+                decreasing = true;
+        while(playerInput.isRunning && stamina > 0){
+            stamina--;
+            yield return new WaitForSeconds(0.1f);
         }
+                decreasing = false;
     }
 
     void RotatePlayer(){
