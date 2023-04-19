@@ -37,10 +37,11 @@ public class Score : MonoBehaviourPunCallbacks
 
     public void UpdateScore()
     {
-        ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2; 
+        ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2;
     }
 
-    public void Update()
+
+    void Update()
     {
         UpdateScore();
     }

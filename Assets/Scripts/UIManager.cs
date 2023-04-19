@@ -9,14 +9,14 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
     public void PlayGame() {  
         SceneManager.LoadScene(1);  
-        
-    }  
+    }
 
-   public void QuitGame() {
-        SceneManager.LoadScene("MenuScene"); 
+    public void QuitGame()
+    {
+        SceneManager.LoadScene("MenuScene");
         Application.Quit();
-        
-   }
+
+    }
 
     public void Start()
     {

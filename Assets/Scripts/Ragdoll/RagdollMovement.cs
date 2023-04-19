@@ -35,7 +35,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
     private float runSpeedLimit = 8;
     private float forceMultiplier = 100;
     private Vector3 movementVector;
-    
+
     [SerializeField]
     private float jumpSpeed = 2.5f;
     private float ySpeed;
@@ -50,7 +50,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        if(!PV.IsMine)
+        if (!PV.IsMine)
         {
             Destroy(PV.gameObject.transform.parent.Find("Root").gameObject);
         }
@@ -72,26 +72,29 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
     }
 
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
         MovePlayer();
-    } 
-    
+    }
 
-    void SetSpeedLimit(){
+
+    void SetSpeedLimit()
+    {
         currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
     }
 
-    void MovePlayer(){
+    void MovePlayer()
+    {
 
 
-         if (playerInput.isJumping && IsGrounded())
+        if (playerInput.isJumping && IsGrounded())
         {
-            
+
             ySpeed = jumpSpeed;
-            
+
             hips.AddForce(Vector3.up * ySpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
         }
-        
+
         if (!IsGrounded())
         {
             ySpeed += Physics.gravity.y * Time.deltaTime;
@@ -102,19 +105,22 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
             playerInput.isJumping = false;
         }
 
-        if(hips.velocity.magnitude < currentSpeedLimit){
+        if (hips.velocity.magnitude < currentSpeedLimit)
+        {
 
 
             movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
 
 
             /* movementVector = new Vector3(playerInput._horizontal,0f,playerInput._vertical).normalized; */
-            if(movementVector.magnitude > 0){
+            if (movementVector.magnitude > 0)
+            {
                 RotatePlayer();
-                hips.AddForce(-movementVector*moveForce*forceMultiplier*Time.deltaTime,
+                hips.AddForce(-movementVector * moveForce * forceMultiplier * Time.deltaTime,
                         ForceMode.VelocityChange);
             }
-            else{
+            else
+            {
 
                 hips.velocity = Vector3.zero;
 
@@ -124,11 +130,12 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
 
     }
 
-    void RotatePlayer(){
-        float targetAngle = Mathf.Atan2(movementVector.x,movementVector.z)* Mathf.Rad2Deg ; 
+    void RotatePlayer()
+    {
+        float targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
 
-        GetComponent<ConfigurableJoint>().targetRotation = Quaternion.Euler(0,- angle,0);
+        GetComponent<ConfigurableJoint>().targetRotation = Quaternion.Euler(0, -angle, 0);
 
     }
 
@@ -137,3 +144,4 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         return Physics.Raycast(hips.transform.Find("BallTrigger").transform.position, Vector3.down, distToGround);
     }
 }
+

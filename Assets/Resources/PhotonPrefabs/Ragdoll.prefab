@@ -4259,7 +4259,6 @@ GameObject:
   - component: {fileID: 2262324447009737933}
   - component: {fileID: 582586950}
   - component: {fileID: 8500217259207621079}
-  - component: {fileID: 5024940446280677597}
   m_Layer: 6
   m_Name: Hips
   m_TagString: Untagged
@@ -4532,27 +4531,10 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 5024940446280677597}
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &5024940446280677597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2262324447009737922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!1 &2262324447054003552
 GameObject:
   m_ObjectHideFlags: 0
@@ -4777,7 +4759,6 @@ GameObject:
   - component: {fileID: 2262324447145510713}
   - component: {fileID: 5347473673568447023}
   - component: {fileID: 8181379355788654139}
-  - component: {fileID: 4846906854885814156}
   m_Layer: 0
   m_Name: Ragdoll
   m_TagString: Untagged
@@ -4858,30 +4839,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &4846906854885814156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2262324447145510712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8181379355788654139}
-  - {fileID: 1186459707792135258}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &2262324447201584896
 GameObject:
   m_ObjectHideFlags: 0
