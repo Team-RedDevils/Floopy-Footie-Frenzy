@@ -17,10 +17,11 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
     private PhotonView PV;
 
 
+    [Header("Rotating")]
     [SerializeField]
     private Transform cam;
     [SerializeField]
-    private float turnSmoothTime = 0.1f;
+    private float turnSmoothTime = 0.5f;
     private float turnSmoothVel;
 
 
@@ -28,24 +29,38 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
     [SerializeField]
     private float moveForce = 10;
     [SerializeField]
-    private float currentSpeedLimit;
-    [SerializeField]
     private float walkSpeedLimit = 5;
     [SerializeField]
     private float runSpeedLimit = 8;
+    [SerializeField]
+    private float currentSpeedLimit;
     private float forceMultiplier = 100;
     private Vector3 movementVector;
 
+
+    [Header("Jumping")]
     [SerializeField]
     private float jumpSpeed = 2.5f;
-    private float ySpeed;
-    float distToGround;
+    [SerializeField]
+    private float fallSpeed = 4f;
+    [SerializeField]
+    private ConfigurableJoint[] joints;
+    private float distToGround;
+    private bool canMove =true;
 
 
-    private void Awake()
-    {
+    private int stamina = 100;
+    private bool healing = false;
+    private bool decreasing = false;
+
+    void Awake(){
+        Cursor.lockState = CursorLockMode.Locked;
+        playerInput = GetComponent<PlayerInput>();
+        playerInput.onJump += Jump;
         PV = GetComponent<PhotonView>();
     }
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -54,88 +69,128 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         {
             Destroy(PV.gameObject.transform.parent.Find("Root").gameObject);
         }
+            distToGround = 0.6f;
+     }
 
-        Cursor.lockState = CursorLockMode.Locked;
-        playerInput = GetComponent<PlayerInput>();
-
-        distToGround = 0.6f;
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if (!PV.IsMine)
+    if (!PV.IsMine)
         {
             return;
         }
-
-        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
-    }
-
-    void FixedUpdate()
-    {
-        MovePlayer();
+         SetSpeedLimit();
+        StaminaCheck();
+        print(stamina);
     }
 
 
-    void SetSpeedLimit()
-    {
-        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
-    }
-
-    void MovePlayer()
-    {
-
-
-        if (playerInput.isJumping && IsGrounded())
-        {
-
-            ySpeed = jumpSpeed;
-
-            hips.AddForce(Vector3.up * ySpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
+    void FixedUpdate(){
+        if(canMove){
+            MovePlayer();
         }
+        IncreaseGravity();
+    } 
 
+    void StaminaCheck(){
+        if(stamina < 100 && !healing ){
+            StartCoroutine(nameof(IncreaseStamina));
+        }
+    }
+    public int GetStamina(){
+        return stamina;
+    }
+
+    IEnumerator IncreaseStamina(){
+        healing = true;
+        while(stamina < 100 && !decreasing){
+            stamina++;
+            yield return new WaitForSeconds(0.1f);
+        }
+        healing = false;
+
+    }
+
+    void SetSpeedLimit(){
+        if(stamina > 0){
+            if(playerInput.isRunning && !decreasing && stamina > 0){
+                StartCoroutine(nameof(DecreaseStamina));
+                currentSpeedLimit = runSpeedLimit;
+            }
+        }
+        else{
+            currentSpeedLimit = walkSpeedLimit;
+        }
+    }
+
+    void Jump(){
+        if(IsGrounded() && canMove && stamina > 40){
+            hips.AddForce((Vector3.up+(-transform.forward*1.2f))* jumpSpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
+            stamina = stamina-40;
+            StartCoroutine(nameof(ReleaseBody));
+        }
+    }
+    
+  IEnumerator ReleaseBody(){
+        canMove = false;
+        foreach(ConfigurableJoint j in joints){
+            JointDrive jointDrive = j.angularXDrive;
+            jointDrive.positionSpring = 100f;
+            j.angularXDrive = jointDrive;
+            j.angularYZDrive = jointDrive;
+        }
+        yield return new WaitForSeconds(2);
+
+        foreach(ConfigurableJoint j in joints){
+            JointDrive jointDrive = j.angularXDrive;
+            jointDrive.positionSpring = 2000;
+            j.angularXDrive = jointDrive;
+            j.angularYZDrive = jointDrive;
+        }
+        canMove = true;
+    }
+
+  
+
+    void IncreaseGravity(){
         if (!IsGrounded())
         {
-            ySpeed += Physics.gravity.y * Time.deltaTime;
+            hips.AddForce(Vector3.down * fallSpeed * forceMultiplier * Time.deltaTime);
         }
-        else
-        {
-            ySpeed = 0;
-            playerInput.isJumping = false;
-        }
+    }
 
-        if (hips.velocity.magnitude < currentSpeedLimit)
-        {
-
-
+    void MovePlayer(){
+        if(hips.velocity.magnitude < currentSpeedLimit){
+            print("CANNMOVEEEE");
             movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
 
-
-            /* movementVector = new Vector3(playerInput._horizontal,0f,playerInput._vertical).normalized; */
-            if (movementVector.magnitude > 0)
-            {
+            if(movementVector.magnitude > 0){
                 RotatePlayer();
                 hips.AddForce(-movementVector * moveForce * forceMultiplier * Time.deltaTime,
                         ForceMode.VelocityChange);
             }
+
             else
             {
-
                 hips.velocity = Vector3.zero;
-
             }
-
         }
-
+    }
+    IEnumerator DecreaseStamina(){
+        decreasing = true;
+        while(playerInput.isRunning && stamina > 0){
+            stamina--;
+            yield return new WaitForSeconds(0.05f);
+        }
+        decreasing = false;
     }
 
     void RotatePlayer()
     {
         float targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
-
-        GetComponent<ConfigurableJoint>().targetRotation = Quaternion.Euler(0, -angle, 0);
+        GetComponent<ConfigurableJoint>().targetRotation = Quaternion.Euler(0,- angle,0);
 
     }
 
