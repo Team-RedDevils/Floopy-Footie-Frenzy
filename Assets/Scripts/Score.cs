@@ -2,14 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Photon.Pun;
 
-public class Score : MonoBehaviour
+public class Score : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI ScoreText;
+    PhotonView PV;
     public int team1score = 0;
     public int team2score = 0;
     public string team1;
     public string team2;
+
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
+
+    [PunRPC]
     public void AddScore(string team)
     {
 
@@ -24,6 +33,8 @@ public class Score : MonoBehaviour
             Debug.Log(team2 + " scored!");
         }
     }
+
+
     public void UpdateScore()
     {
         ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2;

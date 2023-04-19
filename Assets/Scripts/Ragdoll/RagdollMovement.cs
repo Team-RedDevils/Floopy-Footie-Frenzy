@@ -1,15 +1,21 @@
 
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RagdollMovement : MonoBehaviour
+public class RagdollMovement : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private PlayerInput playerInput;
     [SerializeField]
     private Rigidbody hips;
+    [SerializeField]
+    private GameObject Root;
+
+
+    private PhotonView PV;
 
 
     [Header("Rotating")]
@@ -32,6 +38,7 @@ public class RagdollMovement : MonoBehaviour
     private float forceMultiplier = 100;
     private Vector3 movementVector;
 
+
     [Header("Jumping")]
     [SerializeField]
     private float jumpSpeed = 2.5f;
@@ -42,11 +49,26 @@ public class RagdollMovement : MonoBehaviour
     private float distToGround;
     private bool canMove =true;
 
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     private int stamina = 20;
     private bool healing = false;
     private bool decreasing = false;
     
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        if (!PV.IsMine)
+        {
+            Destroy(PV.gameObject.transform.parent.Find("Root").gameObject);
+            distToGround = 0.6f;
+
+        }
+     }
 
     void Awake(){
         Cursor.lockState = CursorLockMode.Locked;
@@ -56,20 +78,18 @@ public class RagdollMovement : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        distToGround = 0.6f;
-        /* StartCoroutine(nameof(DecreaseStamina)); */
-        /* StartCoroutine(nameof(IncreaseStamina)); */
-    }
-
     // Update is called once per frame
     void Update()
     {
-        SetSpeedLimit();
+    if (!PV.IsMine)
+        {
+            return;
+        }
+         SetSpeedLimit();
         StaminaCheck();
+
     }
+
 
     void FixedUpdate(){
         if(canMove){
@@ -82,7 +102,6 @@ public class RagdollMovement : MonoBehaviour
         if(stamina < 100 && !healing ){
             StartCoroutine(nameof(IncreaseStamina));
         }
-
     }
     public int GetStamina(){
         return stamina;
@@ -118,15 +137,14 @@ public class RagdollMovement : MonoBehaviour
             StartCoroutine(nameof(ReleaseBody));
         }
     }
-
-    IEnumerator ReleaseBody(){
+    
+  IEnumerator ReleaseBody(){
         foreach(ConfigurableJoint j in joints){
             JointDrive jointDrive = j.angularXDrive;
             jointDrive.positionSpring = 100f;
             j.angularXDrive = jointDrive;
         }
         canMove = false;
-
         yield return new WaitForSeconds(2);
 
         foreach(ConfigurableJoint j in joints){
@@ -136,6 +154,8 @@ public class RagdollMovement : MonoBehaviour
         }
         canMove = true;
     }
+
+  
 
     void IncreaseGravity(){
         if (!IsGrounded())
@@ -150,28 +170,31 @@ public class RagdollMovement : MonoBehaviour
 
             if(movementVector.magnitude > 0){
                 RotatePlayer();
-                hips.AddForce(-movementVector*moveForce*forceMultiplier*Time.deltaTime,
+                hips.AddForce(-movementVector * moveForce * forceMultiplier * Time.deltaTime,
                         ForceMode.VelocityChange);
             }
-            else{
+
+            else
+            {
                 hips.velocity = Vector3.zero;
             }
         }
     }
     IEnumerator DecreaseStamina(){
-                decreasing = true;
+        decreasing = true;
         while(playerInput.isRunning && stamina > 0){
             stamina--;
             yield return new WaitForSeconds(0.1f);
         }
-                decreasing = false;
+        decreasing = false;
     }
 
-    void RotatePlayer(){
-        float targetAngle = Mathf.Atan2(movementVector.x,movementVector.z)* Mathf.Rad2Deg ; 
+    void RotatePlayer()
+    {
+        float targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
-
         GetComponent<ConfigurableJoint>().targetRotation = Quaternion.Euler(0,- angle,0);
+
     }
 
     bool IsGrounded()
@@ -179,3 +202,4 @@ public class RagdollMovement : MonoBehaviour
         return Physics.Raycast(hips.transform.Find("BallTrigger").transform.position, Vector3.down, distToGround);
     }
 }
+

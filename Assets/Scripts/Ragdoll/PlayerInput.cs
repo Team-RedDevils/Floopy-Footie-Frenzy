@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,13 @@ public class PlayerInput : MonoBehaviour
 
     private KeyCode runKey;
     private KeyCode jumpKey;
+
+    PhotonView PV;
+
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +40,10 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         GetMoveInput(); 
         CheckRunning();
         GetMouseInput();
