@@ -8,15 +8,22 @@ public class UIManager : MonoBehaviour
 {
     public GameObject pauseMenu;
     public void PlayGame() {  
-        SceneManager.LoadScene("Ozan");  
+        SceneManager.LoadScene(1);  
         
     }  
 
    public void QuitGame() {
+        SceneManager.LoadScene("MenuScene"); 
         Application.Quit();
+        
    }
-   
-   public void Update()
+
+    public void Start()
+    {
+        pauseMenu.SetActive(false);
+    }
+
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -33,7 +40,7 @@ public class UIManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 1;
         pauseMenu.SetActive(true);
     }
 

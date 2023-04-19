@@ -1,14 +1,20 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RagdollMovement : MonoBehaviour
+public class RagdollMovement : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private PlayerInput playerInput;
     [SerializeField]
     private Rigidbody hips;
+    [SerializeField]
+    private GameObject Root;
+
+
+    private PhotonView PV;
 
 
     [SerializeField]
@@ -36,10 +42,18 @@ public class RagdollMovement : MonoBehaviour
     float distToGround;
 
 
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        if(!PV.IsMine)
+        {
+            Destroy(PV.gameObject.transform.parent.Find("Root").gameObject);
+        }
 
         Cursor.lockState = CursorLockMode.Locked;
         playerInput = GetComponent<PlayerInput>();
@@ -50,8 +64,12 @@ public class RagdollMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
+        if (!PV.IsMine)
+        {
+            return;
+        }
 
+        currentSpeedLimit = playerInput.isRunning ? runSpeedLimit : walkSpeedLimit;
     }
 
     void FixedUpdate(){
