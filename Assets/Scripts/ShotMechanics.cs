@@ -11,7 +11,6 @@ public class ShotMechanics : MonoBehaviour
     public float shot1,shot2;
     void Start()
     {
-        
     }
 
     // Update is called once per frame

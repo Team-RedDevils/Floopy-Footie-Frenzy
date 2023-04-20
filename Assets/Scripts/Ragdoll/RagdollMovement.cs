@@ -139,7 +139,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         canMove = false;
         foreach(ConfigurableJoint j in joints){
             JointDrive jointDrive = j.angularXDrive;
-            jointDrive.positionSpring = 100f;
+            jointDrive.positionSpring = 40;
             j.angularXDrive = jointDrive;
             j.angularYZDrive = jointDrive;
         }
@@ -147,7 +147,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
 
         foreach(ConfigurableJoint j in joints){
             JointDrive jointDrive = j.angularXDrive;
-            jointDrive.positionSpring = 2000;
+            jointDrive.positionSpring = 1000;
             j.angularXDrive = jointDrive;
             j.angularYZDrive = jointDrive;
         }
@@ -164,8 +164,9 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
     }
 
     void MovePlayer(){
-        if(hips.velocity.magnitude < currentSpeedLimit){
+        if(hips.velocity.magnitude < currentSpeedLimit && canMove){
             movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
+            print(movementVector);
 
             if(movementVector.magnitude > 0){
                 RotatePlayer();
@@ -175,6 +176,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
 
             else
             {
+                hips.angularVelocity = Vector3.zero;
                 hips.velocity = Vector3.zero;
             }
         }
