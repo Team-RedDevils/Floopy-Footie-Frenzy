@@ -82,7 +82,6 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         }
          SetSpeedLimit();
         StaminaCheck();
-        print(stamina);
     }
 
 
@@ -114,9 +113,13 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
 
     void SetSpeedLimit(){
         if(stamina > 0){
-            if(playerInput.isRunning && !decreasing && stamina > 0){
-                StartCoroutine(nameof(DecreaseStamina));
+            if(playerInput.isRunning && !decreasing){
+                print(decreasing);
                 currentSpeedLimit = runSpeedLimit;
+                StartCoroutine(nameof(DecreaseStamina));
+            }
+            else if(!playerInput.isRunning){
+                currentSpeedLimit = walkSpeedLimit;
             }
         }
         else{
@@ -131,8 +134,8 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
             StartCoroutine(nameof(ReleaseBody));
         }
     }
-    
-  IEnumerator ReleaseBody(){
+
+    IEnumerator ReleaseBody(){
         canMove = false;
         foreach(ConfigurableJoint j in joints){
             JointDrive jointDrive = j.angularXDrive;
@@ -151,7 +154,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         canMove = true;
     }
 
-  
+
 
     void IncreaseGravity(){
         if (!IsGrounded())
@@ -162,7 +165,6 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
 
     void MovePlayer(){
         if(hips.velocity.magnitude < currentSpeedLimit){
-            print("CANNMOVEEEE");
             movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
 
             if(movementVector.magnitude > 0){
