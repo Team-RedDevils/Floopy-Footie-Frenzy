@@ -80,7 +80,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         {
             return;
         }
-         SetSpeedLimit();
+        SetSpeedLimit();
         StaminaCheck();
     }
 
@@ -129,7 +129,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
 
     void Jump(){
         if(IsGrounded() && canMove && stamina > 40){
-            hips.AddForce((Vector3.up+(-transform.forward*1.2f))* jumpSpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
+            hips.AddForce((Vector3.up+(-transform.forward))* jumpSpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
             stamina = stamina-40;
             StartCoroutine(nameof(ReleaseBody));
         }
@@ -166,12 +166,11 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
     void MovePlayer(){
         if(hips.velocity.magnitude < currentSpeedLimit && canMove){
             movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
-            print(movementVector);
+            movementVector = Vector3.ProjectOnPlane(movementVector, Vector3.up);
 
             if(movementVector.magnitude > 0){
                 RotatePlayer();
-                hips.AddForce(-movementVector * moveForce * forceMultiplier * Time.deltaTime,
-                        ForceMode.VelocityChange);
+                hips.velocity =-movementVector * moveForce * forceMultiplier * Time.deltaTime;
             }
 
             else

@@ -3074,7 +3074,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064056393}
-  m_LocalRotation: {x: 0.025841674, y: -0.000000017234202, z: 4.455094e-10, w: 0.99966604}
+  m_LocalRotation: {x: 0.025841674, y: 0.000000017234198, z: -4.4550932e-10, w: 0.99966604}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4453,8 +4453,8 @@ MonoBehaviour:
   hips: {fileID: 2262324447009737932}
   Root: {fileID: 2262324446487236603}
   cam: {fileID: 2262324446383102130}
-  turnSmoothTime: 0.1
-  moveForce: 2
+  turnSmoothTime: 0.3
+  moveForce: 4
   walkSpeedLimit: 6
   runSpeedLimit: 12
   currentSpeedLimit: 6
