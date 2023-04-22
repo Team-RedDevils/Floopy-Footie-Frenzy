@@ -80,9 +80,8 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         {
             return;
         }
-         SetSpeedLimit();
+        SetSpeedLimit();
         StaminaCheck();
-        print(stamina);
     }
 
 
@@ -114,9 +113,13 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
 
     void SetSpeedLimit(){
         if(stamina > 0){
-            if(playerInput.isRunning && !decreasing && stamina > 0){
-                StartCoroutine(nameof(DecreaseStamina));
+            if(playerInput.isRunning && !decreasing){
+                print(decreasing);
                 currentSpeedLimit = runSpeedLimit;
+                StartCoroutine(nameof(DecreaseStamina));
+            }
+            else if(!playerInput.isRunning){
+                currentSpeedLimit = walkSpeedLimit;
             }
         }
         else{
@@ -126,17 +129,17 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
 
     void Jump(){
         if(IsGrounded() && canMove && stamina > 40){
-            hips.AddForce((Vector3.up+(-transform.forward*1.2f))* jumpSpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
+            hips.AddForce((Vector3.up+(-transform.forward))* jumpSpeed * forceMultiplier * Time.deltaTime, ForceMode.Impulse);
             stamina = stamina-40;
             StartCoroutine(nameof(ReleaseBody));
         }
     }
-    
-  IEnumerator ReleaseBody(){
+
+    IEnumerator ReleaseBody(){
         canMove = false;
         foreach(ConfigurableJoint j in joints){
             JointDrive jointDrive = j.angularXDrive;
-            jointDrive.positionSpring = 100f;
+            jointDrive.positionSpring = 40;
             j.angularXDrive = jointDrive;
             j.angularYZDrive = jointDrive;
         }
@@ -144,14 +147,14 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
 
         foreach(ConfigurableJoint j in joints){
             JointDrive jointDrive = j.angularXDrive;
-            jointDrive.positionSpring = 2000;
+            jointDrive.positionSpring = 1000;
             j.angularXDrive = jointDrive;
             j.angularYZDrive = jointDrive;
         }
         canMove = true;
     }
 
-  
+
 
     void IncreaseGravity(){
         if (!IsGrounded())
@@ -161,18 +164,18 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
     }
 
     void MovePlayer(){
-        if(hips.velocity.magnitude < currentSpeedLimit){
-            print("CANNMOVEEEE");
+        if(hips.velocity.magnitude < currentSpeedLimit && canMove){
             movementVector = playerInput._horizontal * -cam.right + playerInput._vertical * -cam.forward;
+            movementVector = Vector3.ProjectOnPlane(movementVector, Vector3.up);
 
             if(movementVector.magnitude > 0){
                 RotatePlayer();
-                hips.AddForce(-movementVector * moveForce * forceMultiplier * Time.deltaTime,
-                        ForceMode.VelocityChange);
+                hips.velocity =-movementVector * moveForce * forceMultiplier * Time.deltaTime;
             }
 
             else
             {
+                hips.angularVelocity = Vector3.zero;
                 hips.velocity = Vector3.zero;
             }
         }
