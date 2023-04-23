@@ -1066,6 +1066,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30465752d403914c9de86503283938a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shot1: 20
+  shot2: 30
 --- !u!1 &792724037
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,7 +3393,6 @@ GameObject:
   - component: {fileID: 2262324446383102130}
   - component: {fileID: 2262324446383102133}
   - component: {fileID: 2262324446383102132}
-  - component: {fileID: 2262324446383102128}
   - component: {fileID: 2091234720}
   m_Layer: 0
   m_Name: Player Camera
@@ -3466,25 +3467,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2262324446383102135}
   m_Enabled: 1
---- !u!114 &2262324446383102128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2262324446383102135}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea84f5b4364254f7e9e0b8aefa866d32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInput: {fileID: 2262324447009737933}
-  cameraHolder: {fileID: 2262324447201584897}
-  stomachOffset: 5
-  mouseYClamp: -30
-  mouseZClamp: 30
-  hipJoint: {fileID: 2262324447009737935}
-  stomachJoint: {fileID: 2262324447384192975}
 --- !u!114 &2091234720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4431,13 +4413,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2262324447009737933}
   hips: {fileID: 2262324447009737932}
+  Root: {fileID: 0}
   cam: {fileID: 2262324446383102130}
   turnSmoothTime: 0.1
   moveForce: 1.5
-  currentSpeedLimit: 0
   walkSpeedLimit: 6
   runSpeedLimit: 8
+  currentSpeedLimit: 0
   jumpSpeed: 2.5
+  fallSpeed: 4
+  joints: []
 --- !u!114 &2262324447009737933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4463,7 +4448,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2262324447009737922}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f87537ce3708d7459fe959a574a4bce, type: 3}
   m_Name: 

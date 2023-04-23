@@ -11,16 +11,20 @@ public class CopyAnimation : MonoBehaviour
     private bool mirror;
 
     private ConfigurableJoint cj;
+    private RagdollMovement rm;
     // Start is called before the first frame update
     void Start()
     {
+        rm = FindObjectOfType<RagdollMovement>();
         cj = GetComponent<ConfigurableJoint>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MirrorAnimation();
+        if(rm.canMove){
+            MirrorAnimation();
+        }
     }
     void MirrorAnimation(){
         if(!mirror){
@@ -29,7 +33,5 @@ public class CopyAnimation : MonoBehaviour
         else{
             cj.targetRotation = Quaternion.Inverse(targetLimb.rotation);
         }
-
-
     }
 }

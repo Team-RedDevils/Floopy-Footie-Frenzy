@@ -4,25 +4,17 @@ using UnityEngine;
 
 public class BallTrigger : MonoBehaviour
 {
-    void OnTriggerEnter(Collider ball)
-    {
-        if(ball.gameObject.tag == "Ball")
-        {
-            GetComponentInParent<ShotMechanics> ().ball = true;
-        }
-    }
+    public float shot1,shot2;
     void OnTriggerStay(Collider ball)
     {
         if(ball.gameObject.tag == "Ball")
         {
-            GetComponentInParent<ShotMechanics> ().ball = true;
-        }
-    }
-    void OnTriggerExit(Collider ball)
-    {
-        if(ball.gameObject.tag == "Ball")
-        {
-            GetComponentInParent<ShotMechanics> ().ball = false;
+            if(Input.GetMouseButtonDown(0)){
+                ball.GetComponent<Rigidbody>().velocity = transform.TransformDirection (new Vector3 (0,0,-12));
+            }
+            if(Input.GetMouseButtonDown(1)){
+                ball.GetComponent<Rigidbody>().velocity = transform.TransformDirection (new Vector3 (0,0,Random.Range(-shot1,-shot2)));
+            }           
         }
     }
 }

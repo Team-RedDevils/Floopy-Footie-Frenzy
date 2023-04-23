@@ -46,7 +46,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
     [SerializeField]
     private ConfigurableJoint[] joints;
     private float distToGround;
-    private bool canMove =true;
+    public bool canMove =true;
 
 
     private int stamina = 100;
