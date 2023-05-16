@@ -18,12 +18,14 @@ public class Goal : MonoBehaviour
         if (other.gameObject == LeftGoal)
         {
             score.AddScore(score.team2);
-            timeManager.goalHandler(score.team2);
+            RoomManager.Instance.Spawn(score.team2);
+            //timeManager.goalHandler(score.team2);
         }
         else if (other.gameObject == RightGoal)
         {
             score.AddScore(score.team1);
-            timeManager.goalHandler(score.team1);
+            RoomManager.Instance.Spawn(score.team1);
+            //timeManager.goalHandler(score.team1);
         }
     }
 }

@@ -9,41 +9,45 @@ using Photon.Pun;
 public class TimeManager : MonoBehaviourPunCallbacks
 {
     public float startingTime;
-    float currentTime = 0f;
-    float timeAfterGoal = 1f;
+    float timerIncrementValue;
+    float currentTime;     
+    //float timeAfterGoal = 1f; 
     //float centerTime = 3f;
+    //string onsetTeam;
 
-    string onsetTeam;
-
+    ExitGames.Client.Photon.Hashtable CustomeValue = new ExitGames.Client.Photon.Hashtable();
     [SerializeField] TextMeshProUGUI TimeText;
-    public SpawnManager spawnManager;
+
     void Start()
     {
-        currentTime = startingTime;
-    }
-
-    [PunRPC]
-    void Update()
-    {
-        currentTime -= 1 * Time.deltaTime;
-        string minutes = Mathf.Floor(currentTime / 60).ToString("00");
-        string seconds = Mathf.Floor(currentTime % 60).ToString("00");
-        TimeText.text = minutes + ":" + seconds;
-
-        if (currentTime <= 0)
+        if(PhotonNetwork.IsMasterClient)
         {
-            TimeText.text = "00:00";
+            currentTime = (float)PhotonNetwork.Time;
+            CustomeValue.Add("StartTime", currentTime);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(CustomeValue);
+        }
+        else
+        {
+            currentTime = float.Parse(PhotonNetwork.CurrentRoom.CustomProperties["StartTime"].ToString());
         }
     }
-    public void goalHandler(string team)
-    {
-        onsetTeam = team;
-        currentTime += timeAfterGoal;
-        Invoke(nameof(Spawn), timeAfterGoal);
-    }
 
-    void Spawn()
+    void Update()
     {
-        spawnManager.Spawn(onsetTeam);
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            currentTime = float.Parse(PhotonNetwork.CurrentRoom.CustomProperties["StartTime"].ToString());
+        }
+
+        timerIncrementValue = startingTime - ((float)PhotonNetwork.Time - currentTime);  
+        string minutes = Mathf.Floor(timerIncrementValue / 60).ToString("00");
+        string seconds = Mathf.Floor(timerIncrementValue % 60).ToString("00");
+        TimeText.text = " " + minutes + ":" + seconds;
+
+        if (timerIncrementValue >= startingTime)
+        {
+            //Timer Completed
+            //Do What Ever You What to Do Here
+        }
     }
 }
