@@ -13,6 +13,7 @@ public class Score : MonoBehaviourPunCallbacks
     public int team2score = 0;
     public string team1;
     public string team2;
+    private bool scoreUpdated = false;
     ExitGames.Client.Photon.Hashtable CustomeValue = new ExitGames.Client.Photon.Hashtable();
 
     private void Awake()
@@ -25,12 +26,15 @@ public class Score : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2;
-            CustomeValue.Add("Score", ScoreText.text);
+            CustomeValue.Add("Team1Score", team1score);
+            CustomeValue.Add("Team2Score", team2score);
             PhotonNetwork.CurrentRoom.SetCustomProperties(CustomeValue);
         }
         else
         {
-            ScoreText.text = PhotonNetwork.CurrentRoom.CustomProperties["Score"].ToString();
+            team1score = int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["Team1Score"].ToString());
+            team2score = int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["Team2Score"].ToString());
+            ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2;
             Debug.Log(ScoreText.text);
         }
     }
@@ -48,6 +52,7 @@ public class Score : MonoBehaviourPunCallbacks
             team2score++;
             Debug.Log(team2 + " scored!");
         }
+        scoreUpdated = true;
     }
 
 
@@ -57,22 +62,27 @@ public class Score : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2;
-            if (CustomeValue.ContainsKey("Score"))
-            {
-                CustomeValue.Clear();
-                CustomeValue.Add("Score", ScoreText.text);
-            }
+            CustomeValue.Clear();
+            CustomeValue.Add("Team1Score", team1score);
+            CustomeValue.Add("Team2Score", team2score);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(CustomeValue);
         }
         else
         {
-            ScoreText.text = PhotonNetwork.CurrentRoom.CustomProperties["Score"].ToString();
+            team1score = int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["Team1Score"].ToString());
+            team2score = int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["Team2Score"].ToString());
+            ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2;
+            Debug.Log(ScoreText.text);
         }
-        
+        scoreUpdated = false;
     }
 
 
     void Update()
     {
-        UpdateScore();
+        if(scoreUpdated)
+        {
+            UpdateScore();
+        }
     }
 }

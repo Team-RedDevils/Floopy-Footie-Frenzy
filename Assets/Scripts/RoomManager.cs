@@ -33,7 +33,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Ball.transform.position = (team == score.team1) ? BallSpawnPoints[1].transform.position
             : BallSpawnPoints[0].transform.position;
 
-        PlayerManager.Instance.Respawn();
+        //PlayerManager.Instance.Respawn();
     }
 
     public Transform GetSpawnpoint(int playerTeam)

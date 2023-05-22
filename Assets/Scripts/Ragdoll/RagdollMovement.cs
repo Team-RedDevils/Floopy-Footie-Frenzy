@@ -53,11 +53,18 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
     private bool healing = false;
     private bool decreasing = false;
 
+    PlayerManager playerManager;
+    public GameObject goal;
+    private int respawnCount;
+
+
     void Awake(){
         Cursor.lockState = CursorLockMode.Locked;
         playerInput = GetComponent<PlayerInput>();
         playerInput.onJump += Jump;
         PV = GetComponent<PhotonView>();
+        playerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PlayerManager>();
+        goal = GameObject.FindWithTag("Ball");
     }
 
     
@@ -70,6 +77,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
             Destroy(PV.gameObject.transform.parent.Find("Root").gameObject);
         }
             distToGround = 0.6f;
+        respawnCount = goal.GetComponent<Goal>().goalCount;
      }
 
 
@@ -82,6 +90,12 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         }
         SetSpeedLimit();
         StaminaCheck();
+
+        if(goal.GetComponent<Goal>().goalCount != respawnCount)
+        {
+            respawnCount++;
+            playerManager.Respawn();
+        }
     }
 
 

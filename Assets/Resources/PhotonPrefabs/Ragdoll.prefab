@@ -1206,7 +1206,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 2238160886700835280}
+  - {fileID: 2991479938422997020}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2952,7 +2954,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593575927}
-  m_LocalRotation: {x: 0.21157648, y: 0.28904572, z: -0.06566442, w: 0.9313304}
+  m_LocalRotation: {x: 0.21157646, y: 0.28904575, z: -0.065664425, w: 0.9313303}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3694,7 +3696,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2262324446383102135}
-  m_LocalRotation: {x: 0.20848641, y: 0.28926194, z: -0.0647054, w: 0.932027}
+  m_LocalRotation: {x: 0.20848641, y: 0.28926194, z: -0.06470541, w: 0.9320269}
   m_LocalPosition: {x: -5.011816, y: 6.0368223, z: -7.296524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4900,6 +4902,7 @@ MonoBehaviour:
   - {fileID: 1011533127}
   - {fileID: 517700385}
   canMove: 1
+  goal: {fileID: 0}
 --- !u!114 &2262324447009737933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4936,7 +4939,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 6241309663814503020}
+  - {fileID: 7354226297119887381}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -5230,7 +5235,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3117765828405987149}
+  - {fileID: 3959076988128059563}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -6043,7 +6050,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 1670021722074747897}
+  - {fileID: 1681273323549115817}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log(myTeam);
     }
 
-    public void CreatePlayer()
+    void CreatePlayer()
     {
         Transform spawnpoint = RoomManager.Instance.GetSpawnpoint(myTeam);
         player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ragdoll"), spawnpoint.position, Quaternion.identity, 0, new object[] {PV.ViewID});
@@ -36,6 +36,7 @@ public class PlayerManager : MonoBehaviour
 
     public void Respawn()
     {
+
         PhotonNetwork.Destroy(player);
         CreatePlayer();
     }
