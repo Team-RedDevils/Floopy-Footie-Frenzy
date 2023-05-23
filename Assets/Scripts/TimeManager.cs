@@ -46,7 +46,7 @@ public class TimeManager : MonoBehaviourPunCallbacks
 
         if (timerIncrementValue >= startingTime)
         {
-            SceneManager.LoadScene("EndGameMenu");
+            SceneManager.LoadScene(4);
         }
     }
 }
