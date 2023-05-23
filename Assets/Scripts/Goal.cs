@@ -26,12 +26,17 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        StartCoroutine(action(other));
+    }
+    IEnumerator action(Collider other)
+    {
+        yield return new WaitForSeconds(1);
         if (other.gameObject == LeftGoal)
         {
             goalCount++;
             score.AddScore(score.team2);
             RoomManager.Instance.Spawn(score.team2);
-            
+
             //timeManager.goalHandler(score.team2);
         }
         else if (other.gameObject == RightGoal)

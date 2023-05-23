@@ -13,7 +13,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] Spawnpoint[] RedTeamPlayerSpawnPoints;
     [SerializeField] Spawnpoint[] BlueTeamPlayerSpawnPoints;
     public Score score;
-    public int nextPlayerTeam = 1;
+    public int nextPlayerTeam;
     private void Awake()
     {
         //Only one room manager exists
