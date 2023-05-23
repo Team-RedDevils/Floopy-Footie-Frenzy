@@ -17,7 +17,6 @@ public class TimeManager : MonoBehaviourPunCallbacks
 
     ExitGames.Client.Photon.Hashtable CustomeValue = new ExitGames.Client.Photon.Hashtable();
     [SerializeField] TextMeshProUGUI TimeText;
-
     void Start()
     {
         if(PhotonNetwork.IsMasterClient)
