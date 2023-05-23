@@ -17,6 +17,7 @@ public class TimeManager : MonoBehaviourPunCallbacks
 
     [SerializeField] TextMeshProUGUI TimeText;
     public SpawnManager spawnManager;
+    
     void Start()
     {
         currentTime = startingTime;
