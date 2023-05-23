@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Photon.Pun;
-
+using UnityEngine.SceneManagement;  
 
 public class TimeManager : MonoBehaviourPunCallbacks
 {
@@ -46,8 +46,7 @@ public class TimeManager : MonoBehaviourPunCallbacks
 
         if (timerIncrementValue >= startingTime)
         {
-            //Timer Completed
-            //Do What Ever You What to Do Here
+            SceneManager.LoadScene("EndGameMenu");
         }
     }
 }
