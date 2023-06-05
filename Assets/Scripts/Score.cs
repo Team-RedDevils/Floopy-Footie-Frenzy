@@ -9,8 +9,8 @@ public class Score : MonoBehaviourPunCallbacks
 
     public TextMeshProUGUI ScoreText;
     PhotonView PV;
-    public int team1score = 0;
-    public int team2score = 0;
+    public int team1score;
+    public int team2score;
     public string team1;
     public string team2;
     private bool scoreUpdated = false;
@@ -23,6 +23,8 @@ public class Score : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        team1score = 0;
+        team2score = 0;
         if (PhotonNetwork.IsMasterClient)
         {
             ScoreText.text = team1 + " 0-0 " + team2;
@@ -67,6 +69,7 @@ public class Score : MonoBehaviourPunCallbacks
             CustomeValue.Add("Team2Score", team2score);
             PhotonNetwork.CurrentRoom.SetCustomProperties(CustomeValue);
             ScoreText.text = team1 + " " + team1score + "-" + team2score + " " + team2;
+
         }
         else
         {
@@ -83,7 +86,11 @@ public class Score : MonoBehaviourPunCallbacks
     {
         if (scoreUpdated)
         {
+            
             UpdateScore();
+            EndGameMenu.team1 = team1score;
+            EndGameMenu.team2 = team2score;
+
         }
     }
 }

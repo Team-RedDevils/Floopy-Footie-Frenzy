@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour
         {
             PV.RPC(nameof(GetTeam), RpcTarget.All);
             CreatePlayer();
+            //Destroy(GameObject.Find("Canvases"));
             //Torso, Stomach, Hips, Right Shoulder, Left Shoulder, Right Thigh, Left Thigh
         }
         Debug.Log(myTeam);
@@ -72,6 +73,27 @@ public class PlayerManager : MonoBehaviour
         GameObject.Find("Left Thigh").GetComponent<Renderer>().material.color = Color.blue;
     }
 
+
+    [PunRPC]
+    private void AssignTeam()
+    {
+        foreach (Transform t in PhotonLauncher.Instance.team2PlayerListContent)
+        {
+            if (t.GetComponent<PlayerListItem>().player.NickName.Equals(PhotonNetwork.LocalPlayer.NickName))
+            {
+                myTeam = 2;
+                PV.RPC(nameof(SentTeam), RpcTarget.OthersBuffered, myTeam);
+            }
+        }
+        foreach (Transform t in PhotonLauncher.Instance.team1PlayerListContent)
+        {
+            if (t.GetComponent<PlayerListItem>().player.NickName.Equals(PhotonNetwork.LocalPlayer.NickName))
+            {
+                myTeam = 1;
+                PV.RPC(nameof(SentTeam), RpcTarget.OthersBuffered, myTeam);
+            }
+        }
+    }
     private void Update()
     {
         //if (PV.IsMine)

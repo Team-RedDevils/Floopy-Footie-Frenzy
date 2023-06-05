@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject pauseMenu;
+    //public GameObject pauseMenu;
     public void PlayGame() {  
         SceneManager.LoadScene(1);  
     }
@@ -20,33 +20,33 @@ public class UIManager : MonoBehaviour
 
     public void Start()
     {
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseMenu.activeSelf)
+            /*if (pauseMenu.activeSelf)
             {
                 ResumeGame();
             }
             else
             {
                 PauseGame();
-            }
+            }*/
         }
     }
 
     public void PauseGame()
     {
         Time.timeScale = 1;
-        pauseMenu.SetActive(true);
+        //pauseMenu.SetActive(true);
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1;
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
     }
 }

@@ -16,6 +16,7 @@ public class TimeManager : MonoBehaviourPunCallbacks
     //float centerTime = 3f;
     //string onsetTeam;
 
+
     ExitGames.Client.Photon.Hashtable CustomeValue = new ExitGames.Client.Photon.Hashtable();
     [SerializeField] TextMeshProUGUI TimeText;
     void Start()
@@ -44,10 +45,14 @@ public class TimeManager : MonoBehaviourPunCallbacks
         string seconds = Mathf.Floor(timerIncrementValue % 60).ToString("00");
         TimeText.text = " " + minutes + ":" + seconds;
 
-        if (timerIncrementValue <= 0)
+        if (timerIncrementValue <= 0 && PhotonNetwork.CurrentRoom.IsOpen)
         {
-            Debug.Log("çalþýyor");
-    
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.Disconnect();
+            PhotonNetwork.LoadLevel(4);
+
+            Cursor.lockState = CursorLockMode.None;
+            
         }
     }
 }

@@ -19,15 +19,23 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
   [SerializeField]
   GameObject RoomListItemPrefab;
   [SerializeField]
-  Transform team1PlayerListContent;
+  public Transform team1PlayerListContent;
   [SerializeField]
-  Transform team2PlayerListContent;
+  public Transform team2PlayerListContent;
   [SerializeField]
   GameObject PlayerListItemPrefab;
   [SerializeField]
   GameObject startButton;
 
-  private void Awake() { Instance = this; }
+  private void Awake() {
+        /*
+        if (Instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject); */
+        Instance = this; }
 
   void Start() {
     PhotonNetwork.GameVersion = "0.0.1";
