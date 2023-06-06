@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5, z: -12}
+  m_FollowOffset: {x: 0, y: 4.1998835, z: -8.960899}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -178,7 +178,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: -99.04767
+    Value: -18.846725
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -293,7 +293,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a06891216345891f0acd7b4cfce1f111, type: 2}
+  - {fileID: 2100000, guid: 28fa65fa7e513544681cea9ccdfa76dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -712,7 +712,7 @@ GameObject:
   - component: {fileID: 3481834998818699990}
   m_Layer: 6
   m_Name: Left Thigh
-  m_TagString: Untagged
+  m_TagString: RagdollBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -955,7 +955,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 7929411004807597709}
+  - {fileID: 3481834998818699990}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1284,7 +1286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5, z: -12}
+  m_FollowOffset: {x: 0, y: 4.1998835, z: -8.960899}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1304,7 +1306,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: -99.04767
+    Value: -18.846725
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -1475,7 +1477,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936197665}
-  m_LocalRotation: {x: 0.028544152, y: -0.7599403, z: 0.033449076, w: 0.6485037}
+  m_LocalRotation: {x: 0.19690986, y: -0.1604335, z: 0.032680716, w: 0.9666538}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1688,7 +1690,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a06891216345891f0acd7b4cfce1f111, type: 2}
+  - {fileID: 2100000, guid: 819b57712660b324c846f194f9d7034c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1870,7 +1872,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 4917921149240007210}
+  - {fileID: 4288038144348749475}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1916,7 +1920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039445024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.850694, y: 3.296033, z: 1.887075}
+  m_LocalPosition: {x: 2.8947074, y: 5.9959164, z: -8.480471}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1965,13 +1969,13 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 0.5
+    Value: 0.8982302
     m_SpeedMode: 0
     m_MaxSpeed: 2
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
-    m_InputAxisValue: 0
+    m_InputAxisValue: 0.05
     m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
@@ -1989,7 +1993,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: -99.04767
+    Value: -18.846725
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -2413,7 +2417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.5, z: -12}
+  m_FollowOffset: {x: 0, y: 4.1998835, z: -8.960899}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2433,7 +2437,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: -99.04767
+    Value: -18.846725
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -2919,7 +2923,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593575927}
-  m_LocalRotation: {x: 0.040335383, y: -0.7592062, z: 0.047266465, w: 0.6478773}
+  m_LocalRotation: {x: 0.21446022, y: -0.15981252, z: 0.035593513, w: 0.9629122}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3290,7 +3294,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064056393}
-  m_LocalRotation: {x: 0.01677465, y: -0.76042205, z: 0.019657146, w: 0.6489149}
+  m_LocalRotation: {x: 0.17934094, y: -0.16099995, z: 0.029764835, w: 0.97006696}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3661,8 +3665,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2262324446383102135}
-  m_LocalRotation: {x: 0.02854415, y: -0.7599403, z: 0.033449076, w: 0.64850384}
-  m_LocalPosition: {x: 11.850694, y: 3.296033, z: 1.887075}
+  m_LocalRotation: {x: 0.2108936, y: -0.15994324, z: 0.035001576, w: 0.96369964}
+  m_LocalPosition: {x: 2.8947074, y: 5.9959164, z: -8.480471}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3854,7 +3858,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a06891216345891f0acd7b4cfce1f111, type: 2}
+  - {fileID: 2100000, guid: 819b57712660b324c846f194f9d7034c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4036,7 +4040,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 9184322924847075581}
+  - {fileID: 2994706207148737829}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4076,7 +4082,7 @@ GameObject:
   - component: {fileID: 6185107342474733664}
   m_Layer: 6
   m_Name: Torso
-  m_TagString: Untagged
+  m_TagString: RagdollBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4319,7 +4325,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 238818047135157019}
+  - {fileID: 6185107342474733664}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4406,7 +4414,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a06891216345891f0acd7b4cfce1f111, type: 2}
+  - {fileID: 2100000, guid: 819b57712660b324c846f194f9d7034c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4588,7 +4596,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 5647835338258604128}
+  - {fileID: 4203658840302043167}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4630,7 +4640,7 @@ GameObject:
   - component: {fileID: 8465571069587601454}
   m_Layer: 6
   m_Name: Hips
-  m_TagString: Untagged
+  m_TagString: RagdollBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5035,7 +5045,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a06891216345891f0acd7b4cfce1f111, type: 2}
+  - {fileID: 2100000, guid: 819b57712660b324c846f194f9d7034c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5216,7 +5226,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3935789793781211196}
+  - {fileID: 5964878325752551764}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -5426,7 +5438,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a06891216345891f0acd7b4cfce1f111, type: 2}
+  - {fileID: 2100000, guid: 819b57712660b324c846f194f9d7034c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5608,7 +5620,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3657175747707203626}
+  - {fileID: 1242207995988140472}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -5786,7 +5800,7 @@ GameObject:
   - component: {fileID: 7861923061832333851}
   m_Layer: 6
   m_Name: Left Shoulder
-  m_TagString: Untagged
+  m_TagString: RagdollBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6029,7 +6043,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 5728075104347386152}
+  - {fileID: 7861923061832333851}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -6116,7 +6132,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a06891216345891f0acd7b4cfce1f111, type: 2}
+  - {fileID: 2100000, guid: 819b57712660b324c846f194f9d7034c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6297,7 +6313,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 8523526359157874945}
+  - {fileID: 655655397696873630}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -6337,7 +6355,7 @@ GameObject:
   - component: {fileID: 4600511578935555216}
   m_Layer: 6
   m_Name: Stomach
-  m_TagString: Untagged
+  m_TagString: RagdollBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6580,7 +6598,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3911397762420194643}
+  - {fileID: 4600511578935555216}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -6620,7 +6640,7 @@ GameObject:
   - component: {fileID: 7643654686514774955}
   m_Layer: 6
   m_Name: Right Thigh
-  m_TagString: Untagged
+  m_TagString: RagdollBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6863,7 +6883,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 7473997610117207623}
+  - {fileID: 7643654686514774955}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -6950,7 +6972,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a06891216345891f0acd7b4cfce1f111, type: 2}
+  - {fileID: 2100000, guid: 819b57712660b324c846f194f9d7034c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7131,7 +7153,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 8106662349951357388}
+  - {fileID: 74189957571983669}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -7356,7 +7380,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a06891216345891f0acd7b4cfce1f111, type: 2}
+  - {fileID: 2100000, guid: 28fa65fa7e513544681cea9ccdfa76dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7537,7 +7561,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3322594030244468608}
+  - {fileID: 792018891204551123}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -7577,7 +7603,7 @@ GameObject:
   - component: {fileID: 372082526403616327}
   m_Layer: 6
   m_Name: 'Right Shoulder '
-  m_TagString: Untagged
+  m_TagString: RagdollBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7820,7 +7846,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 6217117276917334353}
+  - {fileID: 372082526403616327}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

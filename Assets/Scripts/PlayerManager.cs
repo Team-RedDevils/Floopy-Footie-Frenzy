@@ -23,9 +23,9 @@ public class PlayerManager : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            PV.RPC(nameof(GetTeam), RpcTarget.All);
+            PV.RPC(nameof(AssignTeam), RpcTarget.All);
             CreatePlayer();
-            //Destroy(GameObject.Find("Canvases"));
+
             //Torso, Stomach, Hips, Right Shoulder, Left Shoulder, Right Thigh, Left Thigh
         }
         Debug.Log(myTeam);
@@ -64,13 +64,16 @@ public class PlayerManager : MonoBehaviour
     [PunRPC]
     void setTeamColor()
     {
-        GameObject.Find("Torso").GetComponent<Renderer>().material.color = Color.blue;
-        GameObject.Find("Stomach").GetComponent<Renderer>().material.color = Color.blue;
-        GameObject.Find("Hips").GetComponent<Renderer>().material.color = Color.blue;
-        GameObject.Find("Right Shoulder").GetComponent<Renderer>().material.color = Color.blue;
-        GameObject.Find("Left Shoulder").GetComponent<Renderer>().material.color = Color.blue;
-        GameObject.Find("Right Thigh").GetComponent<Renderer>().material.color = Color.blue;
-        GameObject.Find("Left Thigh").GetComponent<Renderer>().material.color = Color.blue;
+        if (PV.IsMine)
+        {  
+            GameObject[] body = GameObject.FindGameObjectsWithTag("RagdollBody");
+        foreach(GameObject i in body)
+        {
+            i.GetComponent<Renderer>().material.color = Color.blue;
+        }
+
+        }
+          
     }
 
 
@@ -79,20 +82,23 @@ public class PlayerManager : MonoBehaviour
     {
         foreach (Transform t in PhotonLauncher.Instance.team2PlayerListContent)
         {
+            Debug.Log("çalýþtý + " + t.GetComponent<PlayerListItem>().player.NickName);
             if (t.GetComponent<PlayerListItem>().player.NickName.Equals(PhotonNetwork.LocalPlayer.NickName))
             {
                 myTeam = 2;
-                PV.RPC(nameof(SentTeam), RpcTarget.OthersBuffered, myTeam);
+                PV.RPC(nameof(SentTeam), RpcTarget.All, myTeam);
             }
         }
         foreach (Transform t in PhotonLauncher.Instance.team1PlayerListContent)
         {
+            Debug.Log("çalýþtý + " + t.GetComponent<PlayerListItem>().player.NickName);
             if (t.GetComponent<PlayerListItem>().player.NickName.Equals(PhotonNetwork.LocalPlayer.NickName))
             {
                 myTeam = 1;
-                PV.RPC(nameof(SentTeam), RpcTarget.OthersBuffered, myTeam);
+                PV.RPC(nameof(SentTeam), RpcTarget.All, myTeam);
             }
         }
+        Destroy(GameObject.Find("Canvases"));
     }
     private void Update()
     {

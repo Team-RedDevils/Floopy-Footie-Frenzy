@@ -7,6 +7,7 @@ TagManager:
   - Ball
   - Bullet
   - Camera
+  - RagdollBody
   layers:
   - Default
   - TransparentFX

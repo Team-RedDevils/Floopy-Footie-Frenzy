@@ -5,6 +5,8 @@ using Photon.Pun;
 using UnityEngine.SceneManagement;
 using System.IO;
 
+
+
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager Instance;
@@ -14,6 +16,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] Spawnpoint[] BlueTeamPlayerSpawnPoints;
     public Score score;
     public int nextPlayerTeam;
+
     private void Awake()
     {
         //Only one room manager exists
@@ -46,6 +49,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
+    [PunRPC]
+    void setTeamColor()
+    {
+
+        GameObject[] body = GameObject.FindGameObjectsWithTag("RagdollBody");
+        foreach (GameObject i in body)
+        {
+            i.GetComponent<Renderer>().material.color = Color.blue;
+        }
+    }
+
     public void UpdateTeam()
     {
         if (nextPlayerTeam == 1)
@@ -74,7 +88,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == 2)
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), GetSpawnpoint(nextPlayerTeam).position, GetSpawnpoint(nextPlayerTeam).rotation);
+             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), GetSpawnpoint(nextPlayerTeam).position, GetSpawnpoint(nextPlayerTeam).rotation);
         }
     }
 

@@ -3455,7 +3455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51c884ebb652544881621b6a567420d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 65
+  startingTime: 120
   TimeText: {fileID: 1675546838}
 --- !u!4 &1261491697
 Transform:
@@ -6757,9 +6757,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 919132149243583907}
+  - {fileID: 919132149243583909}
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &919132149243583909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149243583906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1001 &8418857633729943307
 PrefabInstance:
   m_ObjectHideFlags: 0

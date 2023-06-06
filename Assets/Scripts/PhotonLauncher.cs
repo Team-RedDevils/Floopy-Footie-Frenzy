@@ -28,13 +28,13 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
   GameObject startButton;
 
   private void Awake() {
-        /*
+        
         if (Instance)
         {
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject); */
+        DontDestroyOnLoad(gameObject); 
         Instance = this; }
 
   void Start() {
@@ -80,14 +80,13 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
       if (team1PlayerListContent.childCount < 2) {
         Instantiate(PlayerListItemPrefab, team1PlayerListContent)
             .GetComponent<PlayerListItem>()
-            .SetUp(players[i]);
+            .SetUp(players[i], 1);
       } else {
         Instantiate(PlayerListItemPrefab, team2PlayerListContent)
             .GetComponent<PlayerListItem>()
-            .SetUp(players[i]);
+            .SetUp(players[i], 2);
       }
     }
-
     startButton.SetActive(PhotonNetwork.IsMasterClient);
   }
 
@@ -97,7 +96,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
         if (t.GetComponent<PlayerListItem>().player.NickName.Equals(PhotonNetwork.LocalPlayer.NickName)) {
           Instantiate(PlayerListItemPrefab, team1PlayerListContent)
               .GetComponent<PlayerListItem>()
-              .SetUp(t.GetComponent<PlayerListItem>().player);
+              .SetUp(t.GetComponent<PlayerListItem>().player, 1);
           Destroy(t.gameObject);
         }
       }
@@ -111,7 +110,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
         if (t.GetComponent<PlayerListItem>().player.NickName.Equals(PhotonNetwork.LocalPlayer.NickName)) {
           Instantiate(PlayerListItemPrefab, team2PlayerListContent)
             .GetComponent<PlayerListItem>()
-            .SetUp(t.GetComponent<PlayerListItem>().player);
+            .SetUp(t.GetComponent<PlayerListItem>().player, 2);
           Destroy(t.gameObject);
         }
       }
@@ -150,11 +149,18 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
 
   public void OnClickBack() { PhotonNetwork.LoadLevel(0); }
 
+  
   public override void OnPlayerEnteredRoom(Player newPlayer) {
     Instantiate(PlayerListItemPrefab, team1PlayerListContent)
       .GetComponent<PlayerListItem>()
       .SetUp(newPlayer);
   }
+  
 
-  public void StartGame() { PhotonNetwork.LoadLevel(2); }
+  public void StartGame() {
+        foreach (Transform t in roomListContent)
+        {
+            Destroy(t.gameObject);
+        }
+        PhotonNetwork.LoadLevel(2); }
 }

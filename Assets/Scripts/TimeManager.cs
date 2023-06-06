@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
 
 
 public class TimeManager : MonoBehaviourPunCallbacks
@@ -49,10 +50,9 @@ public class TimeManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.Disconnect();
+            Destroy(GameObject.Find("RoomManager"));
             PhotonNetwork.LoadLevel(4);
-
             Cursor.lockState = CursorLockMode.None;
-            
         }
     }
 }
