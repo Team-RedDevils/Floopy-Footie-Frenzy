@@ -8,13 +8,11 @@ public class Goal : MonoBehaviour
     [SerializeField] GameObject LeftGoal;
     [SerializeField] GameObject RightGoal;
     [SerializeField] Score score;
-    [SerializeField] TimeManager timeManager;
     public int goalCount = 0;
     public static Goal Instance;
 
     private void Awake()
     {
-        //Only one room manager exists
         if (Instance)
         {
             Destroy(gameObject);
@@ -22,6 +20,10 @@ public class Goal : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
+
+        LeftGoal = GameObject.FindGameObjectWithTag("LeftGoal");
+        RightGoal = GameObject.FindGameObjectWithTag("RightGoal");
+        score = GameObject.FindAnyObjectByType<Score>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,7 +32,7 @@ public class Goal : MonoBehaviour
     }
     IEnumerator action(Collider other)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.2f);
         if (other.gameObject == LeftGoal)
         {
             goalCount++;

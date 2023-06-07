@@ -28,6 +28,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject);
         Instance = this;
     }
+    private void Start()
+    {
+        Ball = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "SoccerBall"), BallSpawnPoints[2].transform.position, Quaternion.identity, 0);
+    }
     public void Spawn(string team)
     {
         Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -41,12 +45,21 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (playerTeam == 1)
         {
-            return RedTeamPlayerSpawnPoints[Random.Range(0, RedTeamPlayerSpawnPoints.Length)].transform;
+            return RedTeamPlayerSpawnPoints[0].transform;
+        }
+        else if (playerTeam == 2)
+        {
+            return BlueTeamPlayerSpawnPoints[0].transform;
+        }
+        else if (playerTeam == 3)
+        {
+            return RedTeamPlayerSpawnPoints[1].transform;
         }
         else
         {
-            return BlueTeamPlayerSpawnPoints[Random.Range(0, BlueTeamPlayerSpawnPoints.Length)].transform;
+            return BlueTeamPlayerSpawnPoints[1].transform;
         }
+
     }
 
     [PunRPC]

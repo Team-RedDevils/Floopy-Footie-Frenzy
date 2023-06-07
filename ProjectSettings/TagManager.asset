@@ -8,6 +8,9 @@ TagManager:
   - Bullet
   - Camera
   - RagdollBody
+  - RightGoal
+  - LeftGoal
+  - Score
   layers:
   - Default
   - TransparentFX

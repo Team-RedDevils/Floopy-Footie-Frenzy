@@ -80,6 +80,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
             distToGround = 0.6f;
         //Player Respawn
         respawnCount = goal.GetComponent<Goal>().goalCount;
+        goal = GameObject.FindWithTag("Ball");
     }
 
 
@@ -92,7 +93,7 @@ public class RagdollMovement : MonoBehaviourPunCallbacks
         }
         SetSpeedLimit();
         StaminaCheck();
-
+        goal = GameObject.FindWithTag("Ball");
         //Player Respawn
         if (goal.GetComponent<Goal>().goalCount != respawnCount)
         {

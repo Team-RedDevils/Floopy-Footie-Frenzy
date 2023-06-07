@@ -10,6 +10,7 @@ using System.Linq;
 public class PhotonLauncher : MonoBehaviourPunCallbacks {
   public static PhotonLauncher Instance;
 
+   PhotonView PV;
   [SerializeField]
   TMP_InputField roomNameInput;
   [SerializeField]
@@ -69,7 +70,42 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
     MenuManager.Instance.OpenMenu(MenuManager.Instance.menus[3]);
 
     Player[] players = PhotonNetwork.PlayerList;
+    int playerCount = players.Length;
+    foreach(Transform t in team1PlayerListContent)
+        {
+            Destroy(t.gameObject);
+        }
+    for(int i = 0; i < playerCount; i++)
+        {
+            if(playerCount == 1)
+            {
+                Instantiate(PlayerListItemPrefab, team1PlayerListContent)
+            .GetComponent<PlayerListItem>()
+            .SetUp(players[i], 1);
+            }
+            else if(playerCount == 2)
+            {
+                Instantiate(PlayerListItemPrefab, team1PlayerListContent)
+            .GetComponent<PlayerListItem>()
+            .SetUp(players[i], 2);
+            }
+            if (playerCount == 3)
+            {
+                Instantiate(PlayerListItemPrefab, team1PlayerListContent)
+            .GetComponent<PlayerListItem>()
+            .SetUp(players[i], 3);
+            }
+            if (playerCount == 4)
+            {
+                Instantiate(PlayerListItemPrefab, team1PlayerListContent)
+            .GetComponent<PlayerListItem>()
+            .SetUp(players[i], 4);
+            }
+            else { }
+        }
 
+
+        /*
     foreach (Transform t in team1PlayerListContent) {
       Destroy(t.gameObject);
     }
@@ -81,42 +117,40 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
         Instantiate(PlayerListItemPrefab, team1PlayerListContent)
             .GetComponent<PlayerListItem>()
             .SetUp(players[i], 1);
-      } else {
+      } else  if (team2PlayerListContent.childCount < 2){
         Instantiate(PlayerListItemPrefab, team2PlayerListContent)
             .GetComponent<PlayerListItem>()
             .SetUp(players[i], 2);
       }
     }
+        */
     startButton.SetActive(PhotonNetwork.IsMasterClient);
   }
-
+    /*
   public void SwithToOne() {
     if (team1PlayerListContent.childCount < 2) {
       foreach (Transform t in team2PlayerListContent) {
         if (t.GetComponent<PlayerListItem>().player.NickName.Equals(PhotonNetwork.LocalPlayer.NickName)) {
-          Instantiate(PlayerListItemPrefab, team1PlayerListContent)
+                    Instantiate(PlayerListItemPrefab, team1PlayerListContent)
               .GetComponent<PlayerListItem>()
               .SetUp(t.GetComponent<PlayerListItem>().player, 1);
-          Destroy(t.gameObject);
         }
       }
     }
   }
-
   public void SwithToTwo() {
     if (team2PlayerListContent.childCount < 2) {
       foreach (Transform t in team1PlayerListContent) {
         print("AKSJDLAJSLKDJAKSJDKA");
         if (t.GetComponent<PlayerListItem>().player.NickName.Equals(PhotonNetwork.LocalPlayer.NickName)) {
-          Instantiate(PlayerListItemPrefab, team2PlayerListContent)
+                    Instantiate(PlayerListItemPrefab, team2PlayerListContent)
             .GetComponent<PlayerListItem>()
             .SetUp(t.GetComponent<PlayerListItem>().player, 2);
-          Destroy(t.gameObject);
         }
       }
     }
   }
-
+    */
   public override void OnMasterClientSwitched(Player newMasterClient) {
     startButton.SetActive(PhotonNetwork.IsMasterClient);
   }
@@ -126,8 +160,8 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
   }
 
   public void LeaveRoom() {
-    PhotonNetwork.LeaveRoom();
-    MenuManager.Instance.OpenMenu(MenuManager.Instance.menus[0]);
+        PhotonNetwork.LeaveRoom();
+        MenuManager.Instance.OpenMenu(MenuManager.Instance.menus[0]);
   }
 
   public void JoinRoom(RoomInfo info) { PhotonNetwork.JoinRoom(info.Name); }
@@ -153,7 +187,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks {
   public override void OnPlayerEnteredRoom(Player newPlayer) {
     Instantiate(PlayerListItemPrefab, team1PlayerListContent)
       .GetComponent<PlayerListItem>()
-      .SetUp(newPlayer);
+      .SetUp(newPlayer, 2);
   }
   
 
